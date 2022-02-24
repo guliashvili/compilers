@@ -1,0 +1,21 @@
+start_program basic_loop_forloop
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_i, _t1
+    float-list: 
+    main:
+    assign, _2_i, 1, 
+    _L0:
+    brgt, _2_i, 4, _L1
+    mult, _2_i, _2_i, _t1
+    call, printi, _t1
+    add, _2_i, 1, _2_i
+    goto, _L0, , 
+    _L1:
+    return, 0, , 
+end_function main
+
+end_program basic_loop_forloop

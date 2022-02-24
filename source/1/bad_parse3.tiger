@@ -1,0 +1,8 @@
+/* Contains parser errors 3 */
+program bad_parse3
+let
+begin
+    function main() : int
+    begin
+    end
+end

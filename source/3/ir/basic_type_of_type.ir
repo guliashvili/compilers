@@ -1,0 +1,18 @@
+start_program basic_type_of_type
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_b, _2_c, _t1
+    float-list: 
+    main:
+    assign, _2_a, 7, 
+    assign, _2_b, 10, 
+    add, _2_a, _2_b, _t1
+    assign, _2_c, _t1, 
+    call, printi, _2_c
+    return, 0, , 
+end_function main
+
+end_program basic_type_of_type

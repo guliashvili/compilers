@@ -1,0 +1,25 @@
+start_program basic_logical_ops
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _t1, _t2, _t3, _t4, _t5, _t6
+    float-list: 
+    main:
+    assign, _2_a, 1, 
+    or, _2_a, 0, _t1
+    call, printi, _t1
+    and, _2_a, 0, _t2
+    call, printi, _t2
+    or, _2_a, 1, _t3
+    call, printi, _t3
+    and, _2_a, 1, _t4
+    call, printi, _t4
+    and, 1, 0, _t5
+    or, _t5, 1, _t6
+    call, printi, _t6
+    return, 0, , 
+end_function main
+
+end_program basic_logical_ops

@@ -1,0 +1,17 @@
+start_program basic_scope_global
+    static-int-list: _0_a, _0_b
+    static-float-list:
+
+start_function main
+    int main()
+    int-list:
+    float-list:
+    main:
+    assign, _0_b, 43,
+    assign, _0_a, 18,
+    call, printi, _0_a
+    call, printi, _0_b
+    return, 0, ,
+end_function main
+
+end_program basic_scope_global

@@ -1,0 +1,16 @@
+start_program lib_call_printi
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: 
+    float-list: 
+    main:
+    call, printi, 3
+    call, printi, 2
+    call, printi, 1
+    return, 0, , 
+end_function main
+
+end_program lib_call_printi

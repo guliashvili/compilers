@@ -1,0 +1,41 @@
+start_program function_global_scope
+    static-int-list: _0_sum
+    static-float-list: 
+
+start_function subFromSum
+    void subFromSum(int _1_x)
+    int-list: _1_x, _t1
+    float-list: 
+    subFromSum:
+    sub, _0_sum, _1_x, _t1
+    assign, _0_sum, _t1, 
+    call, printi, _0_sum
+    return, , , 
+end_function subFromSum
+
+start_function addToSum
+    void addToSum(int _2_x)
+    int-list: _2_x, _t2
+    float-list: 
+    addToSum:
+    add, _0_sum, _2_x, _t2
+    assign, _0_sum, _t2, 
+    call, printi, _0_sum
+    return, , , 
+end_function addToSum
+
+start_function main
+    int main()
+    int-list: _t3
+    float-list: 
+    main:
+    assign, _0_sum, 5, 
+    call, addToSum, 10
+    add, _0_sum, 5, _t3
+    assign, _0_sum, _t3, 
+    call, subFromSum, 7
+    call, printi, _0_sum
+    return, 0, , 
+end_function main
+
+end_program function_global_scope

@@ -1,0 +1,47 @@
+start_program basic_conditional_nested_if
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_b, _2_c, _2_d, _2_result, _t1, _t2, _t3, _t4
+    float-list: 
+    main:
+    assign, _2_a, 1, 
+    assign, _2_b, 2, 
+    assign, _2_c, 3, 
+    assign, _2_d, 4, 
+    assign, _2_result, 0, 
+    assign, _t1, 1, 
+    brlt, _2_a, _2_b, _L1
+    assign, _t1, 0, 
+    _L1:
+    breq, _t1, 0, _L0
+    assign, _2_result, 10, 
+    assign, _t2, 1, 
+    brlt, _2_a, _2_c, _L3
+    assign, _t2, 0, 
+    _L3:
+    breq, _t2, 0, _L2
+    assign, _2_result, 20, 
+    assign, _t3, 1, 
+    brlt, _2_a, _2_d, _L5
+    assign, _t3, 0, 
+    _L5:
+    breq, _t3, 0, _L4
+    assign, _2_result, 30, 
+    _L4:
+    _L2:
+    assign, _t4, 1, 
+    brgt, _2_a, _2_c, _L7
+    assign, _t4, 0, 
+    _L7:
+    breq, _t4, 0, _L6
+    assign, _2_result, 40, 
+    _L6:
+    _L0:
+    call, printi, _2_result
+    return, 0, , 
+end_function main
+
+end_program basic_conditional_nested_if

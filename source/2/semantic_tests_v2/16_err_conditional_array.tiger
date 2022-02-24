@@ -1,0 +1,21 @@
+program err_conditional_array
+let
+begin
+
+    function main() : int
+    begin
+        let
+            type intArray = array[10] of int;
+            var a : intArray;
+            var b : int := 0;
+        begin
+            if (a) then
+                b := 1;
+            endif;
+        end
+        return 0;
+    end
+
+end
+
+/*Semantic Error: if() condition is array type*/

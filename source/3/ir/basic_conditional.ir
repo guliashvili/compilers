@@ -1,0 +1,64 @@
+start_program basic_conditional
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_b, _2_c, _t1, _t2, _t3, _t4, _t5, _t6
+    float-list: 
+    main:
+    assign, _2_a, 1, 
+    assign, _2_b, 2, 
+    assign, _2_c, 3, 
+    assign, _t1, 1, 
+    brgt, _2_a, 0, _L1
+    assign, _t1, 0, 
+    _L1:
+    breq, _t1, 0, _L0
+    call, printi, 10
+    _L0:
+    assign, _t2, 1, 
+    brlt, _2_a, 2, _L3
+    assign, _t2, 0, 
+    _L3:
+    breq, _t2, 0, _L2
+    call, printi, 20
+    _L2:
+    assign, _t3, 1, 
+    breq, _2_b, 2, _L5
+    assign, _t3, 0, 
+    _L5:
+    breq, _t3, 0, _L4
+    call, printi, 30
+    _L4:
+    assign, _t4, 1, 
+    brneq, _2_b, 4, _L7
+    assign, _t4, 0, 
+    _L7:
+    breq, _t4, 0, _L6
+    call, printi, 40
+    _L6:
+    assign, _t5, 1, 
+    brgeq, _2_c, 0, _L10
+    assign, _t5, 0, 
+    _L10:
+    breq, _t5, 0, _L8
+    call, printi, 50
+    goto, _L9, , 
+    _L8:
+    call, printi, 60
+    _L9:
+    assign, _t6, 1, 
+    brleq, _2_c, 0, _L13
+    assign, _t6, 0, 
+    _L13:
+    breq, _t6, 0, _L11
+    call, printi, 70
+    goto, _L12, , 
+    _L11:
+    call, printi, 80
+    _L12:
+    return, 0, , 
+end_function main
+
+end_program basic_conditional

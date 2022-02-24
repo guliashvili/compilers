@@ -1,0 +1,12 @@
+program err_func_no_return
+let
+begin
+
+    function main() : int
+    begin
+        printi(0);
+    end
+
+end
+
+/*Semantic Error: function return statement missing.*/

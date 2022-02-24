@@ -1,0 +1,36 @@
+/* Test: nested if-else stmt */
+
+program basic_conditional_nested_if_else
+let
+begin
+
+    function main() : int
+    begin
+        let
+            var a, b, c, d : int;
+        begin
+            a := 1;
+            b := 2;
+            c := 3;
+            d := 0;
+
+            if (a > b) then
+                if (a > c) then
+                    d := 10;
+                else
+                    d := 20;
+                endif;
+            else
+                if (a < c) then
+                    d := 30;
+                else
+                    d := 40;
+                endif;
+            endif;
+
+            printi(d);
+        end
+        return 0;
+    end
+
+end

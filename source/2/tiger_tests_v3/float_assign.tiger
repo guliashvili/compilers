@@ -1,0 +1,30 @@
+/* Test: float assignment */
+
+program float_assign
+let
+begin
+
+    function main() : int
+    begin
+        let
+            var a : float;
+            var b, c  : float;
+
+            var d : float := 4.0;
+            var e,f : float := 5.0;
+        begin
+            a := 1.0;
+            b := 2.0;
+            c := 3.0;
+
+            printf(a);
+            printf(b);
+            printf(c);
+            printf(d);
+            printf(e);
+            printf(f);
+        end
+        return 0;
+    end
+
+end

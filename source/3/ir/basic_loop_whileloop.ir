@@ -1,0 +1,25 @@
+start_program basic_loop_whileloop
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_i, _t1, _t2
+    float-list: 
+    main:
+    assign, _2_i, 0, 
+    _L0:
+    assign, _t1, 1, 
+    brlt, _2_i, 3, _L2
+    assign, _t1, 0, 
+    _L2:
+    breq, _t1, 0, _L1
+    call, printi, _2_i
+    add, _2_i, 1, _t2
+    assign, _2_i, _t2, 
+    goto, _L0, , 
+    _L1:
+    return, 0, , 
+end_function main
+
+end_program basic_loop_whileloop

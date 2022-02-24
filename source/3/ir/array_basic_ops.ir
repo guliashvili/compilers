@@ -1,0 +1,25 @@
+start_program array_basic_ops
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a[3], _t1, _t2, _t3, _t4, _t5, _t6
+    float-list: 
+    main:
+    array_store, _2_a, 0, 10
+    array_store, _2_a, 1, 20
+    array_load, _t1, _2_a, 0
+    array_load, _t2, _2_a, 1
+    add, _t1, _t2, _t3
+    array_store, _2_a, 2, _t3
+    array_load, _t4, _2_a, 0
+    call, printi, _t4
+    array_load, _t5, _2_a, 1
+    call, printi, _t5
+    array_load, _t6, _2_a, 2
+    call, printi, _t6
+    return, 0, , 
+end_function main
+
+end_program array_basic_ops

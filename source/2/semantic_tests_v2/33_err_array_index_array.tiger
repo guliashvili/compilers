@@ -1,0 +1,18 @@
+program err_array_index_array
+let
+begin
+
+    function main() : int
+    begin
+        let
+            type intArray = array[10] of int;
+            var a,b : intArray := 0;
+        begin
+            a[b] := 1;
+        end
+        return 0;
+    end
+
+end
+
+/*Semantic Error: array index is array type*/

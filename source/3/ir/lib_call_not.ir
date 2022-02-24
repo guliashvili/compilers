@@ -1,0 +1,18 @@
+start_program lib_call_not
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a
+    float-list: 
+    main:
+    assign, _2_a, 1, 
+    callr, _2_a, not, _2_a
+    call, printi, _2_a
+    callr, _2_a, not, _2_a
+    call, printi, _2_a
+    return, 0, , 
+end_function main
+
+end_program lib_call_not

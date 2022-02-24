@@ -1,0 +1,30 @@
+/* Test: integer assignment */
+
+program basic_int_assign
+let
+begin
+
+    function main() : int
+    begin
+        let
+            var a : int;
+            var b, c  : int;
+
+            var d : int := 4;
+            var e,f : int := 5;
+        begin
+            a := 1;
+            b := 2;
+            c := 3;
+
+            printi(a);
+            printi(b);
+            printi(c);
+            printi(d);
+            printi(e);
+            printi(f);
+        end
+        return 0;
+    end
+
+end

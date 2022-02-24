@@ -1,0 +1,85 @@
+start_program demo_prng
+    static-int-list: _0_size
+    static-float-list: 
+
+start_function modulo
+    int modulo(int _1_a, int _1_b)
+    int-list: _1_a, _1_b, _2_r, _t1, _t2, _t3
+    float-list: 
+    modulo:
+    div, _1_a, _1_b, _t1
+    mult, _1_b, _t1, _t2
+    sub, _1_a, _t2, _t3
+    assign, _2_r, _t3, 
+    return, _2_r, , 
+end_function modulo
+
+start_function adjust
+    int adjust(int _3_a)
+    int-list: _3_a, _4_c, _4_b, _4_i, _4_isOdd, _t4, _t5, _t6, _t7, _t8, _t9, _t10, _t11
+    float-list: 
+    adjust:
+    assign, _4_c, 1, 
+    assign, _4_b, _3_a, 
+    assign, _4_i, 1, 
+    _L0:
+    brgt, _4_i, _3_a, _L1
+    add, _4_b, _4_c, _t4
+    assign, _4_b, _t4, 
+    add, _4_b, _4_c, _t5
+    assign, _4_b, _t5, 
+    add, _4_b, _4_c, _t6
+    assign, _4_b, _t6, 
+    callr, _4_isOdd, modulo, _4_b, 2
+    breq, _4_isOdd, 0, _L2
+    sub, _4_b, _4_c, _t7
+    assign, _4_b, _t7, 
+    sub, _4_b, _4_c, _t8
+    assign, _4_b, _t8, 
+    goto, _L3, , 
+    _L2:
+    add, _4_b, _4_c, _t9
+    assign, _4_b, _t9, 
+    add, _4_b, _4_c, _t10
+    assign, _4_b, _t10, 
+    add, _4_b, _4_c, _t11
+    assign, _4_b, _t11, 
+    _L3:
+    add, _4_i, 1, _4_i
+    goto, _L0, , 
+    _L1:
+    return, _4_b, , 
+end_function adjust
+
+start_function gen_random
+    void gen_random(int _5_seed, int _5_mod, int _5_mult, int _5_inc)
+    int-list: _5_seed, _5_mod, _5_mult, _5_inc, _6_i, _6_prev, _6_cur, _6_a, _t12, _t13
+    float-list: 
+    gen_random:
+    assign, _6_prev, _5_seed, 
+    assign, _6_i, 1, 
+    _L4:
+    brgt, _6_i, _0_size, _L5
+    callr, _6_a, adjust, _6_prev
+    call, printi, _6_a
+    mult, _6_prev, _5_mult, _t12
+    add, _t12, _5_inc, _t13
+    callr, _6_cur, modulo, _t13, _5_mod
+    assign, _6_prev, _6_cur, 
+    add, _6_i, 1, _6_i
+    goto, _L4, , 
+    _L5:
+    return, , , 
+end_function gen_random
+
+start_function main
+    int main()
+    int-list: 
+    float-list: 
+    main:
+    assign, _0_size, 10, 
+    call, gen_random, 17, 397, 17, 1
+    return, 0, , 
+end_function main
+
+end_program demo_prng

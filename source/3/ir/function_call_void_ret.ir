@@ -1,0 +1,24 @@
+start_program function_call_void_ret
+    static-int-list: 
+    static-float-list: 
+
+start_function printSquare
+    void printSquare(int _1_x)
+    int-list: _1_x, _t1
+    float-list: 
+    printSquare:
+    mult, _1_x, _1_x, _t1
+    call, printi, _t1
+    return, , , 
+end_function printSquare
+
+start_function main
+    int main()
+    int-list: 
+    float-list: 
+    main:
+    call, printSquare, 10
+    return, 0, , 
+end_function main
+
+end_program function_call_void_ret

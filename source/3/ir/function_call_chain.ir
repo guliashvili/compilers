@@ -1,0 +1,53 @@
+start_program function_call_chain
+    static-int-list: 
+    static-float-list: 
+
+start_function add0
+    int add0(int _1_y)
+    int-list: _1_y
+    float-list: 
+    add0:
+    return, _1_y, , 
+end_function add0
+
+start_function add1
+    int add1(int _2_y)
+    int-list: _2_y, _t1
+    float-list: 
+    add1:
+    callr, _2_y, add0, _2_y
+    add, _2_y, 1, _t1
+    return, _t1, , 
+end_function add1
+
+start_function add2
+    int add2(int _3_y)
+    int-list: _3_y, _t2
+    float-list: 
+    add2:
+    callr, _3_y, add1, _3_y
+    add, _3_y, 1, _t2
+    return, _t2, , 
+end_function add2
+
+start_function add3
+    int add3(int _4_y)
+    int-list: _4_y, _t3
+    float-list: 
+    add3:
+    callr, _4_y, add2, _4_y
+    add, _4_y, 1, _t3
+    return, _t3, , 
+end_function add3
+
+start_function main
+    int main()
+    int-list: _6_y
+    float-list: 
+    main:
+    callr, _6_y, add3, 10
+    call, printi, _6_y
+    return, 0, , 
+end_function main
+
+end_program function_call_chain

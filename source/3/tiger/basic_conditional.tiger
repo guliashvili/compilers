@@ -1,0 +1,45 @@
+/* Test: basic conditional tests */
+
+program basic_conditional
+let
+begin
+
+    function main() : int
+    begin
+        let
+            var a : int := 1;
+            var b : int := 2;
+            var c : int := 3;
+        begin
+            if a > 0 then
+                printi(10);
+            endif;
+
+            if a < 2 then
+                printi(20);
+            endif;
+
+            if b == 2 then
+                printi(30);
+            endif;
+
+            if b != 4 then
+                printi(40);
+            endif;
+
+            if c >= 0 then
+                printi(50);
+            else
+                printi(60);
+            endif;
+
+            if c <= 0 then
+                printi(70);
+            else
+                printi(80);
+            endif;
+        end
+        return 0;
+    end
+
+end

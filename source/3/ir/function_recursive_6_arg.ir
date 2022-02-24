@@ -1,0 +1,44 @@
+start_program function_recursive_6_arg
+    static-int-list: 
+    static-float-list: 
+
+start_function compute
+    int compute(int _1_a, int _1_b, int _1_c, int _1_d, int _1_e, int _1_f)
+    int-list: _1_a, _1_b, _1_c, _1_d, _1_e, _1_f, _2_sum, _2_tmp, _t1, _t2, _t3, _t4, _t5, _t6, _t7, _t8, _t9, _t10, _t11, _t12, _t13
+    float-list: 
+    compute:
+    add, _1_a, _1_b, _t1
+    add, _t1, _1_c, _t2
+    add, _t2, _1_d, _t3
+    add, _t3, _1_e, _t4
+    add, _t4, _1_f, _t5
+    assign, _2_sum, _t5, 
+    assign, _t6, 1, 
+    brleq, _2_sum, 0, _L1
+    assign, _t6, 0, 
+    _L1:
+    breq, _t6, 0, _L0
+    return, 1, , 
+    _L0:
+    sub, _1_a, 1, _t7
+    sub, _1_b, 2, _t8
+    sub, _1_c, 3, _t9
+    sub, _1_d, 4, _t10
+    sub, _1_e, 5, _t11
+    sub, _1_f, 6, _t12
+    callr, _2_tmp, compute, _t7, _t8, _t9, _t10, _t11, _t12
+    add, 1, _2_tmp, _t13
+    return, _t13, , 
+end_function compute
+
+start_function main
+    int main()
+    int-list: _4_result
+    float-list: 
+    main:
+    callr, _4_result, compute, 11, 12, 13, 14, 15, 16
+    call, printi, _4_result
+    return, 0, , 
+end_function main
+
+end_program function_recursive_6_arg

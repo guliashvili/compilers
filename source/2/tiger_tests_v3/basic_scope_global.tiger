@@ -1,0 +1,18 @@
+/* Test: static global scope */
+
+program basic_scope_global
+let
+    static a : int;
+    static b : int := 43;
+begin
+
+    function main() : int
+    begin
+        a := 18;
+        printi(a);
+        printi(b);
+
+        return 0;
+    end
+
+end

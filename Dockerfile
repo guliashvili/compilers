@@ -6,6 +6,7 @@ RUN set -eux; \
 	apt update; \
 	add-apt-repository -y ppa:ubuntu-toolchain-r/test; \
 	add-apt-repository ppa:linuxuprising/java -y; \
+    add-apt-repository ppa:deadsnakes/ppa -y; \
 	apt-get update;
 
 RUN set -eux; \
@@ -19,7 +20,9 @@ RUN set -eux; \
 		curl \
 		pkg-config \
 		uuid-dev \
-		make;
+		make; \
+        python3.10; \
+        python3-pip;
 	# update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11 --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-11 --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-11  --slave /usr/bin/cpp cpp /usr/bin/cpp-11
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \

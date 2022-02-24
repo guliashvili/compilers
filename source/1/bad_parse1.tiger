@@ -1,0 +1,11 @@
+/* Contains parser errors 1 */
+program bad_parse1
+let
+    static 0name : int;
+    static name : int;
+begin
+    function main() :  int
+    let
+    begin
+        return 2 ;;
+end

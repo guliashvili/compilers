@@ -1,0 +1,40 @@
+start_program demo_square_root
+    static-int-list: 
+    static-float-list: 
+
+start_function squareRoot
+    float squareRoot(float _1_n)
+    int-list: _t2
+    float-list: _1_n, _2_x, _2_y, _2_e, _t1, _t3, _t4, _t5
+    squareRoot:
+    assign, _2_e, 0.000001, 
+    assign, _2_x, _1_n, 
+    assign, _2_y, 1.0, 
+    _L0:
+    sub, _2_x, _2_y, _t1
+    assign, _t2, 1, 
+    brgt, _t1, _2_e, _L2
+    assign, _t2, 0, 
+    _L2:
+    breq, _t2, 0, _L1
+    add, _2_x, _2_y, _t3
+    div, _t3, 2, _t4
+    assign, _2_x, _t4, 
+    div, _1_n, _2_x, _t5
+    assign, _2_y, _t5, 
+    goto, _L0, , 
+    _L1:
+    return, _2_x, , 
+end_function squareRoot
+
+start_function main
+    int main()
+    int-list: 
+    float-list: _4_result
+    main:
+    callr, _4_result, squareRoot, 42.0
+    call, printf, _4_result
+    return, 0, , 
+end_function main
+
+end_program demo_square_root

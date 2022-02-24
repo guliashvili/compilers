@@ -1,0 +1,30 @@
+/* Test: global scope across functions */
+
+program function_global_scope
+let
+    static sum : int;
+begin
+
+    function subFromSum (x : int)
+    begin
+        sum := sum - x;
+        printi(sum);
+    end
+
+    function addToSum (x : int)
+    begin
+        sum := sum + x;
+        printi(sum);
+    end
+
+    function main() : int
+    begin
+        sum := 5;
+        addToSum(10);
+        sum := sum + 5;
+        subFromSum(7);
+        printi(sum);
+        return 0;
+    end
+
+end

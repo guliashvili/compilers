@@ -1,0 +1,119 @@
+start_program demo_matrix
+    static-int-list: _0_n, _0_m
+    static-float-list: _0_A[128], _0_b[16], _0_x[8]
+
+start_function naive_mod
+    float naive_mod(float _1_a, float _1_n)
+    int-list: _t1
+    float-list: _1_a, _1_n, _2_r, _t2
+    naive_mod:
+    assign, _2_r, _1_a, 
+    _L0:
+    assign, _t1, 1, 
+    brgt, _2_r, _1_n, _L2
+    assign, _t1, 0, 
+    _L2:
+    breq, _t1, 0, _L1
+    sub, _2_r, _1_n, _t2
+    assign, _2_r, _t2, 
+    goto, _L0, , 
+    _L1:
+    return, _2_r, , 
+end_function naive_mod
+
+start_function init_data
+    void init_data()
+    int-list: _4_i, _t3, _t4, _t11, _t14
+    float-list: _t12, _t13, _t15, _5_t1, _5_t2, _t5, _t6, _t7, _t8, _t9, _t10
+    init_data:
+    assign, _0_m, 8, 
+    assign, _0_n, 16, 
+    assign, _4_i, 0, 
+    _L3:
+    mult, _0_m, _0_n, _t3
+    sub, _t3, 1, _t4
+    brgt, _4_i, _t4, _L4
+    mult, 3.0, _4_i, _t5
+    add, _t5, 1, _t6
+    callr, _5_t1, naive_mod, _t6, 19.0
+    add, _4_i, 5.0, _t7
+    callr, _5_t2, naive_mod, _t7, 23.0
+    mult, _5_t1, _5_t2, _t8
+    div, _t8, 10.0, _t9
+    sub, _t9, 8.0, _t10
+    array_store, _0_A, _4_i, _t10
+    add, _4_i, 1, _4_i
+    goto, _L3, , 
+    _L4:
+    assign, _4_i, 0, 
+    _L5:
+    sub, _0_m, 1, _t11
+    brgt, _4_i, _t11, _L6
+    sub, _4_i, 3.5, _t12
+    assign, _t13, 1, 
+    assign, _t14, 1, 
+    _L7:
+    brgt, _t14, 2, _L8
+    mult, _t13, _t12, _t13
+    add, _t14, 1, _t14
+    goto, _L7, , 
+    _L8:
+    sub, _t13, 6, _t15
+    array_store, _0_x, _4_i, _t15
+    add, _4_i, 1, _4_i
+    goto, _L5, , 
+    _L6:
+    return, , , 
+end_function init_data
+
+start_function matrix_vector_mult
+    void matrix_vector_mult()
+    int-list: _7_row, _7_col, _t16, _t17, _t21, _t22
+    float-list: _t18, _t19, _t20, _t23, _t24
+    matrix_vector_mult:
+    assign, _7_row, 0, 
+    _L9:
+    sub, _0_n, 1, _t16
+    brgt, _7_row, _t16, _L10
+    array_store, _0_b, _7_row, 0.0
+    assign, _7_col, 0, 
+    _L11:
+    sub, _0_m, 1, _t17
+    brgt, _7_col, _t17, _L12
+    array_load, _t18, _0_b, _7_row
+    array_load, _t19, _0_x, _7_col
+    mult, _0_m, _7_row, _t21
+    add, _t21, _7_col, _t22
+    array_load, _t20, _0_A, _t22
+    mult, _t19, _t20, _t23
+    add, _t18, _t23, _t24
+    array_store, _0_b, _7_row, _t24
+    add, _7_col, 1, _7_col
+    goto, _L11, , 
+    _L12:
+    add, _7_row, 1, _7_row
+    goto, _L9, , 
+    _L10:
+    return, , , 
+end_function matrix_vector_mult
+
+start_function main
+    int main()
+    int-list: _9_i, _t25
+    float-list: _t26
+    main:
+    call, init_data
+    call, matrix_vector_mult
+    assign, _9_i, 0, 
+    _L13:
+    sub, _0_n, 1, _t25
+    brgt, _9_i, _t25, _L14
+    array_load, _t26, _0_b, _9_i
+    call, printf, _t26
+    add, _9_i, 1, _9_i
+    goto, _L13, , 
+    _L14:
+    return, 0, , 
+end_function main
+
+end_program demo_matrix

@@ -1,0 +1,27 @@
+program err_redefine_func
+let
+begin
+
+    function addIt(a : int, b : int) : int
+    begin
+        return a + b;
+    end
+
+    function addIt(x : int, y : int) : int
+    begin
+        return x + y;
+    end
+
+    function main(): int
+    begin
+        let
+            var a, b: int := 1;
+        begin
+            a := addIt(a, b);
+        end
+        return 0;
+    end
+
+end
+
+/*Semantic Error: function redefined in same scope*/

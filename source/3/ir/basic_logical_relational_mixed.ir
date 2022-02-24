@@ -1,0 +1,76 @@
+start_program basic_logical_relational_mixed
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_b, _2_c, _t1, _t2, _t3, _t4, _t5, _t6, _t7, _t8, _t9, _t10, _t11, _t12, _t13, _t14, _t15, _t16, _t17, _t18
+    float-list: 
+    main:
+    assign, _2_a, 1, 
+    assign, _2_b, 2, 
+    assign, _2_c, 3, 
+    assign, _t1, 1, 
+    brleq, _2_a, _2_b, _L0
+    assign, _t1, 0, 
+    _L0:
+    assign, _t2, 1, 
+    brleq, _t1, _2_c, _L1
+    assign, _t2, 0, 
+    _L1:
+    call, printi, _t2
+    assign, _t3, 1, 
+    brneq, _2_a, _2_b, _L2
+    assign, _t3, 0, 
+    _L2:
+    assign, _t4, 1, 
+    brgeq, _2_c, _2_a, _L3
+    assign, _t4, 0, 
+    _L3:
+    or, _t3, _t4, _t5
+    call, printi, _t5
+    assign, _t6, 1, 
+    brlt, _2_a, _2_b, _L4
+    assign, _t6, 0, 
+    _L4:
+    and, _t6, _2_c, _t7
+    call, printi, _t7
+    assign, _t8, 1, 
+    brlt, _2_a, _2_b, _L5
+    assign, _t8, 0, 
+    _L5:
+    assign, _t9, 1, 
+    brgt, _2_c, _2_b, _L6
+    assign, _t9, 0, 
+    _L6:
+    and, _t8, _t9, _t10
+    call, printi, _t10
+    assign, _t11, 1, 
+    brgt, _2_a, _2_b, _L7
+    assign, _t11, 0, 
+    _L7:
+    assign, _t12, 1, 
+    brlt, _2_a, _2_c, _L8
+    assign, _t12, 0, 
+    _L8:
+    or, _t11, _t12, _t13
+    call, printi, _t13
+    assign, _t14, 1, 
+    brgt, _2_a, _2_b, _L9
+    assign, _t14, 0, 
+    _L9:
+    assign, _t15, 1, 
+    brgt, _2_b, _2_c, _L10
+    assign, _t15, 0, 
+    _L10:
+    and, _t14, _t15, _t16
+    assign, _t17, 1, 
+    brlt, _2_c, 4, _L11
+    assign, _t17, 0, 
+    _L11:
+    or, _t16, _t17, _t18
+    call, printi, _t18
+    return, 0, , 
+end_function main
+
+end_program basic_logical_relational_mixed

@@ -1,0 +1,25 @@
+start_program basic_int_assign
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_b, _2_c, _2_d, _2_e, _2_f
+    float-list: 
+    main:
+    assign, _2_d, 4, 
+    assign, _2_e, 5, 
+    assign, _2_f, 5, 
+    assign, _2_a, 1, 
+    assign, _2_b, 2, 
+    assign, _2_c, 3, 
+    call, printi, _2_a
+    call, printi, _2_b
+    call, printi, _2_c
+    call, printi, _2_d
+    call, printi, _2_e
+    call, printi, _2_f
+    return, 0, , 
+end_function main
+
+end_program basic_int_assign

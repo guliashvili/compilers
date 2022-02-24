@@ -1,0 +1,23 @@
+program err_func_return_array
+let
+    type intArray = array[10] of int;
+begin
+
+    function getArray() : intArray
+    begin
+        let
+            var a: intArray := 1;
+        begin
+            return a;
+        end
+    end
+
+    function main(): int
+    begin
+        getArray();
+        return 0;
+    end
+
+end
+
+/*Semantic Error: function return array type*/

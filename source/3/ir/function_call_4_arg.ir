@@ -1,0 +1,26 @@
+start_program function_call_4_arg
+    static-int-list: 
+    static-float-list: 
+
+start_function sum
+    int sum(int _1_a, int _1_b, int _1_c, int _1_d)
+    int-list: _1_a, _1_b, _1_c, _1_d, _t1, _t2, _t3
+    float-list: 
+    sum:
+    add, _1_a, _1_b, _t1
+    add, _t1, _1_c, _t2
+    add, _t2, _1_d, _t3
+    return, _t3, , 
+end_function sum
+
+start_function main
+    int main()
+    int-list: _3_result
+    float-list: 
+    main:
+    callr, _3_result, sum, 1, 2, 3, 4
+    call, printi, _3_result
+    return, 0, , 
+end_function main
+
+end_program function_call_4_arg

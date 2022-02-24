@@ -1,0 +1,38 @@
+start_program array_combo_ops
+    static-int-list: _0_a[3]
+    static-float-list:
+
+start_function reset
+    void reset()
+    int-list: _2_b[3]
+    float-list:
+    reset:
+    assign, _2_b, 3, 12
+    array_store, _2_b, 0, 11
+    array_store, _2_b, 2, 13
+    assign, _0_a, _2_b,
+    return, , ,
+end_function reset
+
+start_function main
+    int main()
+    int-list: _4_b, _t1, _t2, _t3, _t4, _t5, _t6
+    float-list:
+    main:
+    assign, _0_a, 3, 5
+    array_store, _0_a, 0, 15
+    array_load, _t1, _0_a, 0
+    assign, _4_b, _t1,
+    call, printi, _4_b
+    call, reset
+    call, printi, _4_b
+    array_load, _t2, _0_a, 0
+    array_load, _t3, _0_a, 1
+    add, _t2, _t3, _t4
+    array_load, _t5, _0_a, 2
+    add, _t4, _t5, _t6
+    call, printi, _t6
+    return, 0, ,
+end_function main
+
+end_program array_combo_ops

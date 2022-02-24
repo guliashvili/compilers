@@ -1,0 +1,21 @@
+program err_for_exp_float
+let
+begin
+
+    function main() : int
+    begin
+        let
+            var i : int;
+            var a : int := 1;
+            var b : float := 2.0;
+        begin
+            for i := 1 to (a + b) do
+                printi(i);
+            enddo;
+        end
+        return 0;
+    end
+
+end
+
+/*Semantic Error: for loop range is float type*/

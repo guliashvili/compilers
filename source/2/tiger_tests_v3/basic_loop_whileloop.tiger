@@ -1,0 +1,21 @@
+/* Test: basic while loop */
+
+program basic_loop_whileloop
+let
+begin
+
+    function main() : int
+    begin
+        let
+            var i : int;
+        begin
+            i := 0;
+            while (i < 3) do
+                printi(i);
+                i := i + 1;
+            enddo;
+        end
+        return 0;
+    end
+
+end

@@ -1,0 +1,33 @@
+start_program function_recursive_factorial
+    static-int-list: 
+    static-float-list: 
+
+start_function factorial
+    int factorial(int _1_n)
+    int-list: _1_n, _2_tmp, _t1, _t2, _t3
+    float-list: 
+    factorial:
+    assign, _t1, 1, 
+    breq, _1_n, 0, _L1
+    assign, _t1, 0, 
+    _L1:
+    breq, _t1, 0, _L0
+    return, 1, , 
+    _L0:
+    sub, _1_n, 1, _t2
+    callr, _2_tmp, factorial, _t2
+    mult, _1_n, _2_tmp, _t3
+    return, _t3, , 
+end_function factorial
+
+start_function main
+    int main()
+    int-list: _4_result
+    float-list: 
+    main:
+    callr, _4_result, factorial, 7
+    call, printi, _4_result
+    return, 0, , 
+end_function main
+
+end_program function_recursive_factorial

@@ -1,0 +1,12 @@
+program err_func_return_void
+let
+begin
+
+    function main() : int
+    begin
+        return;
+    end
+
+end
+
+/*Semantic Error: function return void expected int*/

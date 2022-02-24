@@ -1,0 +1,139 @@
+start_program demo_motor
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_print_power, _2_calculate_efficiency, _2_n_iterations, _2_it, _t12, _t19, _t34, _t43
+    float-list: _2_motor_force, _2_drag, _2_friction, _2_M, _2_dv_dt, _2_rho, _2_CDa, _2_dx_dt, _2_G, _2_Crr1, _2_Crr2, _2_dt, _2_x_i, _2_x_f, _2_v_i, _2_torque, _2_radius, _2_power, _2_wire_loss, _2_R_line, _2_R_batt, _2_Iphase, _2_component_efficiency, _2_mc_efficiency, _2_motor_efficiency, _2_batt_efficiency, _2_mc_power_loss, _2_bus_power, _2_rpm_max, _2_bus_voltage, _2_batt_dissipated, _2_bus_current, _2_nominal_power, _t1, _t2, _t3, _t4, _t5, _t6, _t7, _t8, _t9, _t10, _t11, _t13, _t14, _t15, _t16, _t17, _t18, _t20, _t21, _t22, _t23, _t24, _t25, _t26, _t27, _t28, _t29, _t30, _t31, _t32, _t33, _t35, _t36, _t37, _t38, _t39, _t40, _t41, _t42, _t44, _t45, _t46, _t47, _t48, _t49
+    main:
+    assign, _2_print_power, 1, 
+    assign, _2_calculate_efficiency, 1, 
+    assign, _2_n_iterations, 5, 
+    assign, _2_M, 320.0, 
+    assign, _2_G, 9.81, 
+    assign, _2_Crr1, 0.009, 
+    assign, _2_Crr2, 0.001, 
+    assign, _2_rho, 1.225, 
+    assign, _2_CDa, 0.2, 
+    assign, _2_radius, 0.28, 
+    assign, _2_R_line, 0.05, 
+    assign, _2_R_batt, 0.16, 
+    assign, _2_x_i, 1000.0, 
+    assign, _2_v_i, 10.0, 
+    assign, _2_x_f, 1025.0, 
+    assign, _2_dt, 2.1, 
+    assign, _2_Iphase, 11.6, 
+    assign, _2_bus_power, 900.0, 
+    assign, _2_bus_voltage, 140.25, 
+    assign, _2_component_efficiency, 1.0, 
+    assign, _2_wire_loss, 0.0, 
+    assign, _2_it, 0, 
+    _L0:
+    brgt, _2_it, _2_n_iterations, _L1
+    sub, _2_x_f, _2_x_i, _t1
+    div, _t1, _2_dt, _t2
+    assign, _2_dx_dt, _t2, 
+    sub, _2_dx_dt, _2_v_i, _t3
+    div, _t3, _2_dt, _t4
+    assign, _2_dv_dt, _t4, 
+    mult, _2_M, _2_G, _t5
+    mult, _2_Crr2, _2_dx_dt, _t6
+    add, _2_Crr1, _t6, _t7
+    mult, _t5, _t7, _t8
+    assign, _2_friction, _t8, 
+    mult, 0.5, _2_rho, _t9
+    mult, _t9, _2_CDa, _t10
+    assign, _t11, 1, 
+    assign, _t12, 1, 
+    _L2:
+    brgt, _t12, 2, _L3
+    mult, _t11, _2_dx_dt, _t11
+    add, _t12, 1, _t12
+    goto, _L2, , 
+    _L3:
+    mult, _t10, _t11, _t13
+    assign, _2_drag, _t13, 
+    add, _2_drag, _2_friction, _t14
+    mult, _2_M, _2_dv_dt, _t15
+    add, _t14, _t15, _t16
+    assign, _2_motor_force, _t16, 
+    mult, _2_motor_force, _2_radius, _t17
+    assign, _2_torque, _t17, 
+    breq, _2_calculate_efficiency, 0, _L4
+    assign, _t18, 1, 
+    assign, _t19, 1, 
+    _L5:
+    brgt, _t19, 2, _L6
+    mult, _t18, _2_Iphase, _t18
+    add, _t19, 1, _t19
+    goto, _L5, , 
+    _L6:
+    mult, 0.011, _t18, _t20
+    mult, 0.0033, _2_Iphase, _t21
+    add, _t20, _t21, _t22
+    add, _t22, 0.02, _t23
+    assign, _2_mc_power_loss, _t23, 
+    div, _2_mc_power_loss, _2_bus_power, _t24
+    sub, 1.0, _t24, _t25
+    assign, _2_mc_efficiency, _t25, 
+    sub, _2_bus_voltage, 79.0, _t26
+    mult, 7.6, _t26, _t27
+    add, _t27, 600.0, _t28
+    assign, _2_rpm_max, _t28, 
+    mult, 0.18, _2_torque, _t29
+    add, _2_rpm_max, _t29, _t30
+    div, _2_rpm_max, _t30, _t31
+    assign, _2_motor_efficiency, _t31, 
+    div, _2_bus_power, _2_bus_voltage, _t32
+    assign, _2_bus_current, _t32, 
+    assign, _t33, 1, 
+    assign, _t34, 1, 
+    _L7:
+    brgt, _t34, 2, _L8
+    mult, _t33, _2_bus_current, _t33
+    add, _t34, 1, _t34
+    goto, _L7, , 
+    _L8:
+    mult, _2_R_batt, _t33, _t35
+    assign, _2_batt_dissipated, _t35, 
+    div, _2_batt_dissipated, _2_bus_power, _t36
+    add, 1.0, _t36, _t37
+    div, 1.0, _t37, _t38
+    assign, _2_batt_efficiency, _t38, 
+    mult, _2_mc_efficiency, _2_motor_efficiency, _t39
+    mult, _t39, _2_batt_efficiency, _t40
+    assign, _2_component_efficiency, _t40, 
+    mult, 3.0, _2_R_line, _t41
+    assign, _t42, 1, 
+    assign, _t43, 1, 
+    _L9:
+    brgt, _t43, 2, _L10
+    mult, _t42, _2_Iphase, _t42
+    add, _t43, 1, _t43
+    goto, _L9, , 
+    _L10:
+    mult, _t41, _t42, _t44
+    assign, _2_wire_loss, _t44, 
+    _L4:
+    breq, _2_print_power, 0, _L11
+    mult, _2_torque, _2_dx_dt, _t45
+    div, _t45, _2_radius, _t46
+    assign, _2_nominal_power, _t46, 
+    mult, _2_nominal_power, _2_component_efficiency, _t47
+    add, _t47, _2_wire_loss, _t48
+    assign, _2_power, _t48, 
+    call, printf, _2_power
+    goto, _L12, , 
+    _L11:
+    call, printf, _2_torque
+    _L12:
+    sub, _2_bus_voltage, 1.0, _t49
+    assign, _2_bus_voltage, _t49, 
+    add, _2_it, 1, _2_it
+    goto, _L0, , 
+    _L1:
+    return, 0, , 
+end_function main
+
+end_program demo_motor

@@ -1,0 +1,21 @@
+program err_while_expr_array
+let
+begin
+
+    function main() : int
+    begin
+        let
+            type intArray = array[10] of int;
+            var a : intArray := 1;
+        begin
+            while (a) do
+                printi(a[1]);
+                break;
+            enddo;
+        end
+        return 0;
+    end
+
+end
+
+/*Semantic Error: while() condition is array type*/

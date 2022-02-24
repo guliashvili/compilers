@@ -1,0 +1,65 @@
+start_program benchmark2
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_i, _2_b, _t1, _t2, _t3, _t4, _t5, _t6, _t7, _t8, _t9, _t10, _t11, _t12, _t13, _t14, _t15, _t16, _t17, _t18
+    float-list: 
+    main:
+    assign, _2_a, 0, 
+    assign, _2_i, 0, 
+    assign, _2_b, 1, 
+    add, _2_a, _2_b, _t1
+    assign, _2_a, _t1, 
+    add, _2_a, _2_b, _t2
+    assign, _2_a, _t2, 
+    add, _2_a, _2_b, _t3
+    assign, _2_a, _t3, 
+    _L0:
+    assign, _t4, 1, 
+    brlt, _2_i, 10, _L2
+    assign, _t4, 0, 
+    _L2:
+    breq, _t4, 0, _L1
+    add, _2_a, _2_b, _t5
+    assign, _2_a, _t5, 
+    add, _2_a, _2_b, _t6
+    assign, _2_a, _t6, 
+    add, _2_a, _2_b, _t7
+    assign, _2_a, _t7, 
+    assign, _t8, 1, 
+    brlt, _2_i, 5, _L5
+    assign, _t8, 0, 
+    _L5:
+    breq, _t8, 0, _L3
+    add, _2_a, _2_b, _t9
+    assign, _2_a, _t9, 
+    add, _2_a, _2_b, _t10
+    assign, _2_a, _t10, 
+    add, _2_a, _2_b, _t11
+    assign, _2_a, _t11, 
+    goto, _L4, , 
+    _L3:
+    sub, _2_a, _2_b, _t12
+    assign, _2_a, _t12, 
+    sub, _2_a, _2_b, _t13
+    assign, _2_a, _t13, 
+    sub, _2_a, _2_b, _t14
+    assign, _2_a, _t14, 
+    _L4:
+    add, _2_a, _2_b, _t15
+    assign, _2_a, _t15, 
+    add, _2_a, _2_b, _t16
+    assign, _2_a, _t16, 
+    add, _2_a, _2_b, _t17
+    assign, _2_a, _t17, 
+    add, _2_i, 1, _t18
+    assign, _2_i, _t18, 
+    goto, _L0, , 
+    _L1:
+    call, printi, _2_a
+    return, 0, , 
+end_function main
+
+end_program benchmark2

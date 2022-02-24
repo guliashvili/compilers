@@ -1,0 +1,74 @@
+start_program basic_math_combo
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_b, _2_c, _t1, _t2, _t3, _t4, _t5, _t6, _t7, _t8, _t9, _t10, _t11, _t12, _t13, _t14, _t15, _t16, _t17, _t18, _t19, _t20, _t21, _t22, _t23, _t24, _t25, _t26, _t27, _t28, _t29, _t30, _t31, _t32, _t33, _t34, _t35
+    float-list: 
+    main:
+    assign, _2_a, 5, 
+    assign, _2_b, 50, 
+    add, 100, _2_a, _t1
+    add, _t1, _2_b, _t2
+    assign, _2_c, _t2, 
+    call, printi, _2_c
+    sub, 100, _2_a, _t3
+    sub, _t3, _2_b, _t4
+    assign, _2_c, _t4, 
+    call, printi, _2_c
+    mult, 100, _2_a, _t5
+    mult, _t5, _2_b, _t6
+    assign, _2_c, _t6, 
+    call, printi, _2_c
+    div, 500, _2_a, _t7
+    div, _t7, _2_b, _t8
+    assign, _2_c, _t8, 
+    call, printi, _2_c
+    sub, 100, 50, _t9
+    add, _t9, 25, _t10
+    assign, _2_c, _t10, 
+    call, printi, _2_c
+    div, 100, 50, _t11
+    mult, _t11, 25, _t12
+    assign, _2_c, _t12, 
+    call, printi, _2_c
+    mult, _2_a, _2_b, _t13
+    add, _t13, _2_a, _t14
+    add, _t14, _2_b, _t15
+    sub, _t15, _2_a, _t16
+    div, _2_b, _2_a, _t17
+    sub, _t16, _t17, _t18
+    assign, _2_c, _t18, 
+    call, printi, _2_c
+    div, 200, 4, _t19
+    div, 25, 5, _t20
+    sub, _t19, _t20, _t21
+    assign, _2_c, _t21, 
+    call, printi, _2_c
+    mult, _2_b, _2_a, _t22
+    sub, 100, _t22, _t23
+    add, _t23, 7, _t24
+    assign, _2_c, _t24, 
+    call, printi, _2_c
+    sub, 100, _2_b, _t25
+    add, _2_a, 7, _t26
+    mult, _t25, _t26, _t27
+    assign, _2_c, _t27, 
+    call, printi, _2_c
+    sub, 10, _2_b, _t28
+    sub, _2_a, 3, _t29
+    div, _t29, 2, _t30
+    mult, _t28, _t30, _t31
+    assign, _2_c, _t31, 
+    call, printi, _2_c
+    sub, 7, 1, _t32
+    mult, 3, _t32, _t33
+    div, 60, _t33, _t34
+    add, 20, _t34, _t35
+    assign, _2_c, _t35, 
+    call, printi, _2_c
+    return, 0, , 
+end_function main
+
+end_program basic_math_combo

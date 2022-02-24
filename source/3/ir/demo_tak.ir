@@ -1,0 +1,39 @@
+start_program demo_tak
+    static-int-list: 
+    static-float-list: 
+
+start_function tak
+    int tak(int _1_x, int _1_y, int _1_z)
+    int-list: _1_x, _1_y, _1_z, _2_a, _2_b, _2_c, _2_d, _t1, _t2, _t3, _t4
+    float-list: 
+    tak:
+    assign, _t1, 1, 
+    brlt, _1_y, _1_x, _L2
+    assign, _t1, 0, 
+    _L2:
+    breq, _t1, 0, _L0
+    sub, _1_x, 1, _t2
+    callr, _2_a, tak, _t2, _1_y, _1_z
+    sub, _1_y, 1, _t3
+    callr, _2_b, tak, _t3, _1_z, _1_x
+    sub, _1_z, 1, _t4
+    callr, _2_c, tak, _t4, _1_x, _1_y
+    callr, _2_d, tak, _2_a, _2_b, _2_c
+    return, _2_d, , 
+    goto, _L1, , 
+    _L0:
+    return, _1_z, , 
+    _L1:
+end_function tak
+
+start_function main
+    int main()
+    int-list: _4_a
+    float-list: 
+    main:
+    callr, _4_a, tak, 15, 10, 5
+    call, printi, _4_a
+    return, 0, , 
+end_function main
+
+end_program demo_tak

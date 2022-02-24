@@ -1,0 +1,56 @@
+start_program basic_relational_ops
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: _2_a, _2_b, _2_c, _t1, _t2, _t3, _t4, _t5, _t6, _t7, _t8
+    float-list: 
+    main:
+    assign, _2_a, 1, 
+    assign, _2_b, 2, 
+    assign, _2_c, 3, 
+    assign, _t1, 1, 
+    breq, _2_a, 1, _L0
+    assign, _t1, 0, 
+    _L0:
+    call, printi, _t1
+    assign, _t2, 1, 
+    brneq, _2_a, 1, _L1
+    assign, _t2, 0, 
+    _L1:
+    call, printi, _t2
+    assign, _t3, 1, 
+    brgt, _2_a, _2_b, _L2
+    assign, _t3, 0, 
+    _L2:
+    call, printi, _t3
+    assign, _t4, 1, 
+    brlt, _2_a, _2_b, _L3
+    assign, _t4, 0, 
+    _L3:
+    call, printi, _t4
+    assign, _t5, 1, 
+    brleq, _2_a, _2_c, _L4
+    assign, _t5, 0, 
+    _L4:
+    call, printi, _t5
+    assign, _t6, 1, 
+    brleq, _2_a, 1, _L5
+    assign, _t6, 0, 
+    _L5:
+    call, printi, _t6
+    assign, _t7, 1, 
+    brgeq, _2_a, _2_c, _L6
+    assign, _t7, 0, 
+    _L6:
+    call, printi, _t7
+    assign, _t8, 1, 
+    brgeq, _2_a, 1, _L7
+    assign, _t8, 0, 
+    _L7:
+    call, printi, _t8
+    return, 0, , 
+end_function main
+
+end_program basic_relational_ops

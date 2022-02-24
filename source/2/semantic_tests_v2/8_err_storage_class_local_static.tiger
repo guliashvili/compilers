@@ -1,0 +1,17 @@
+program err_storage_class_local_static
+let
+begin
+
+    function main() : int
+    begin
+        let
+            static a : int;
+        begin
+            a := 10;
+        end
+        return 0;
+    end
+
+end
+
+/*Semantic Error: static local variable*/

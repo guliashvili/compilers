@@ -1,0 +1,51 @@
+start_program demo_slope
+    static-int-list: 
+    static-float-list: _0_p1[2], _0_p2[2], _0_rise, _0_run, _0_slope, _0_yintercept, _0_xintercept
+
+start_function main
+    int main()
+    int-list: _t7, _t8, _t9
+    float-list: _t1, _t2, _t3, _t4, _t5, _t6, _t10, _t11, _t12, _t13, _t14, _t15, _t16
+    main:
+    array_store, _0_p1, 0, 2.0
+    array_store, _0_p1, 1, 1.0
+    array_store, _0_p2, 0, 3.0
+    array_store, _0_p2, 1, 3.0
+    array_load, _t1, _0_p2, 1
+    array_load, _t2, _0_p1, 1
+    sub, _t1, _t2, _t3
+    assign, _0_rise, _t3, 
+    array_load, _t4, _0_p2, 0
+    array_load, _t5, _0_p1, 0
+    sub, _t4, _t5, _t6
+    assign, _0_run, _t6, 
+    assign, _t7, 1, 
+    breq, _0_run, 0.0, _L1
+    assign, _t7, 0, 
+    _L1:
+    assign, _t8, 1, 
+    breq, _0_rise, 0.0, _L2
+    assign, _t8, 0, 
+    _L2:
+    or, _t7, _t8, _t9
+    breq, _t9, 0, _L0
+    call, printi, 0
+    call, exit, 1
+    _L0:
+    div, _0_rise, _0_run, _t10
+    assign, _0_slope, _t10, 
+    array_load, _t11, _0_p2, 1
+    array_load, _t12, _0_p2, 0
+    mult, _0_slope, _t12, _t13
+    sub, _t11, _t13, _t14
+    assign, _0_yintercept, _t14, 
+    sub, 0, _0_yintercept, _t15
+    div, _t15, _0_slope, _t16
+    assign, _0_xintercept, _t16, 
+    call, printf, _0_slope
+    call, printf, _0_xintercept
+    call, printf, _0_yintercept
+    return, 0, , 
+end_function main
+
+end_program demo_slope

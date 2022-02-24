@@ -1,0 +1,39 @@
+start_program function_recursive_fib
+    static-int-list: _0_result
+    static-float-list: 
+
+start_function fib
+    int fib(int _1_n)
+    int-list: _1_n, _2_tmp1, _2_tmp2, _t1, _t2, _t3, _t4
+    float-list: 
+    fib:
+    assign, _2_tmp1, 0, 
+    assign, _2_tmp2, 0, 
+    assign, _t1, 1, 
+    brleq, _1_n, 1, _L2
+    assign, _t1, 0, 
+    _L2:
+    breq, _t1, 0, _L0
+    return, _1_n, , 
+    goto, _L1, , 
+    _L0:
+    sub, _1_n, 1, _t2
+    callr, _2_tmp1, fib, _t2
+    sub, _1_n, 2, _t3
+    callr, _2_tmp2, fib, _t3
+    add, _2_tmp1, _2_tmp2, _t4
+    return, _t4, , 
+    _L1:
+end_function fib
+
+start_function main
+    int main()
+    int-list: 
+    float-list: 
+    main:
+    callr, _0_result, fib, 12
+    call, printi, _0_result
+    return, 0, , 
+end_function main
+
+end_program function_recursive_fib

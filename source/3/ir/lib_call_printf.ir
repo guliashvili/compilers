@@ -1,0 +1,16 @@
+start_program lib_call_printf
+    static-int-list: 
+    static-float-list: 
+
+start_function main
+    int main()
+    int-list: 
+    float-list: 
+    main:
+    call, printf, 3.0
+    call, printf, 2.0
+    call, printf, 1.0
+    return, 0, , 
+end_function main
+
+end_program lib_call_printf
