@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM gradescope/auto-builds:ubuntu-20.04
 
 RUN set -eux; \
 	apt update; \
@@ -19,8 +19,8 @@ RUN set -eux; \
 		curl \
 		pkg-config \
 		uuid-dev \
-		make; \
-	update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11 --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-11 --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-11  --slave /usr/bin/cpp cpp /usr/bin/cpp-11
+		make;
+	# update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11 --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-11 --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-11  --slave /usr/bin/cpp cpp /usr/bin/cpp-11
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz \
@@ -46,3 +46,9 @@ RUN set -eux; \
 	&& ldconfig 
 		
 
+ADD source /autograder/source
+
+RUN cp /autograder/source/run_autograder /autograder/run_autograder
+
+# Ensure that scripts are Unix-friendly and executable
+RUN chmod +x /autograder/run_autograder
