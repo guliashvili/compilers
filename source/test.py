@@ -1,55 +1,21 @@
-import os
-import sys
 import json
-from os.path import exists
-
-CPP = "C++"
-JAVA = "JAVA"
-
-
-def print_output(tests, score, execution_time, output):
-  output = {
-    "execution_time": execution_time,
-    "visibility": "visible",
-    "stdout_visibility": "visible",
-    "score": score,
-    "output": output,
-    "tests": tests
-  }
-
-  with open("results/results.json", "w") as f:
-    f.write(json.dumps(output))
-
-  quit()
-
-
-
-def execute():
-  pass
-
-def test_homework_1():
-  pass
-
+from os import listdir
+from os.path import isfile, join
+from helper import execute, add_result, check_files, print_output
+from hw1 import test_hw1
 
 def main():
-  executable_type = None
+  msg = check_files()
+  if msg:
+    print_output(0, None, msg)
 
-  if exists("submission/tigerc"):
-    executable_type = CPP
-  elif exists("submission/tigerc.jar"):
-    executable_type = JAVA
-  else:
-    print_output([], 0, None, "No binary found")
-
-
+  test_hw1(False)
+  print_output(None, None, None)
 
 
 if __name__ == "__main__":
   main()
 
-
-# execution_time = 0
-tests = []
 
 
 
