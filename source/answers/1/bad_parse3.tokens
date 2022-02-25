@@ -1,0 +1,13 @@
+<PROGRAM, "program">
+<ID, "bad_parse3">
+<LET, "let">
+<BEGIN, "begin">
+<FUNCTION, "function">
+<ID, "main">
+<OPENPAREN, "(">
+<CLOSEPAREN, ")">
+<COLON, ":">
+<INT, "int">
+<BEGIN, "begin">
+<END, "end">
+<END, "end">

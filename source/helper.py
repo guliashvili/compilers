@@ -3,17 +3,16 @@ from os import listdir
 from os.path import isfile, join
 
 CPP = "C++"
-CPP_FILE = "submission/tigerc"
+CPP_FILE = "submission/cs8803_bin/tigerc"
 
 JAVA = "JAVA"
-JAVA_FILE = "submission/tigerc.jar"
+JAVA_FILE = "submission/cs8803_bin/tigerc.jar"
 
 G4_FILE = "submission/Tiger.g4"
 
 tests = []
 
 def print_output(score, execution_time, output):
-
   output = {
     "execution_time": execution_time,
     "visibility": "visible",
@@ -24,7 +23,7 @@ def print_output(score, execution_time, output):
   }
 
   with open("results/results.json", "w") as f:
-    f.write(json.dumps(output))
+    f.write(json.dumps(output,indent=4, sort_keys=True))
 
   quit()
 
@@ -61,8 +60,6 @@ def run_thing(commands):
 
 def execute(args, f):
   commands = []
-  if f is not None:
-      commands.extend(['-i', f])
 
   executable_type = get_type()
   if executable_type == CPP:
@@ -71,6 +68,8 @@ def execute(args, f):
     commands.extend(["javac", JAVA_FILE])
 
   commands.extend(args)
+  if f is not None:
+      commands.extend(['-i', f])
 
   return run_thing(commands)
 
@@ -86,25 +85,29 @@ def add_result(score, max_score, name, number, output):
         })
 
 
-def executor(files, checker, title, chapter, max_score, args, is_test):
+def executor(files, checker, title, chapter, max_score, args, is_test, append_path):
     counter = 1
-    for f in files:
-        f_name = f.replace(".tiger")
-        f_name = f_name[f_name.rindex('/'):]
-
+    for f_name in files:
         message, success = "Unknown Exception", False
         try:
-            stdout, stderr, retcode = execute(args, f)
-            message, success = checker(f, stdout, stderr, retcode)
+            stdout, stderr, retcode = execute(args, append_path + f_name + ".tiger")
+            if is_test:
+                message, success = checker(f_name, stdout, stderr, retcode, append_path)
         except:
             pass
 
         if is_test:
             add_result(max_score * int(success),
                        max_score,
-                       f"{chapter}.{counter}) {title}: {f_name}",
+                       f"{title}: {f_name}",
                        f"{chapter}.{counter}",
-                       json.dumps({"stdout": stdout, "stderr": stderr, "retcode": retcode, "message": message})
+                       json.dumps({
+                           "stdout": stdout.decode("utf-8"),
+                           "stderr": stderr.decode("utf-8"),
+                           "retcode": retcode,
+                           "message": message
+                       },
+                       indent=4, sort_keys=True)
                        )
 
         counter += 1

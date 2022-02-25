@@ -1,0 +1,10 @@
+/* Contains lexer errors */
+program bad_scan
+let
+    static $name : int;
+begin
+    function __main__() : int 
+    begin
+        return 1;
+    end
+end

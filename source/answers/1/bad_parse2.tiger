@@ -1,0 +1,11 @@
+/* Contains parser errors 2 */
+program bad_parse2
+let
+    static a : float;
+begin
+    function main() : int
+    begin
+        a := .123;
+        return 0;
+    end
+end

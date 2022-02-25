@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cd submission
+ls
 make
 cd ../
-mkdir results
-python3.10 source/test.py
+mkdir -p results
+python3 source/main.py

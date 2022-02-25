@@ -21,8 +21,7 @@ RUN set -eux; \
 		pkg-config \
 		uuid-dev \
 		make; \
-        python3.10; \
-        python3-pip;
+        python3;
 	# update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11 --slave /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-11 --slave /usr/bin/gcc-ranlib gcc-ranlib /usr/bin/gcc-ranlib-11  --slave /usr/bin/cpp cpp /usr/bin/cpp-11
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
@@ -35,7 +34,7 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 RUN set -eux; \
 	git clone https://github.com/antlr/antlr4.git \
 	&& cd antlr4 \
-	&& git checkout 4.9.3 \ 
+	&& git checkout 4.9.3 \
  	&& mvn clean --projects tool --also-make \
     	&& mvn -DskipTests install --projects tool --also-make \
     	&& mv ./tool/target/antlr4-*-complete.jar /usr/local/lib/ \
@@ -46,12 +45,18 @@ RUN set -eux; \
 	&& cp -r antlr4-runtime /usr/local/include \
 	&& cd ../lib \
 	&& cp * /usr/local/lib \
-	&& ldconfig 
-		
+	&& ldconfig
+
+
+RUN set -eux; \
+    echo '#!/bin/bash\nCLASSPATH=" /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
+    && chmod +x /usr/bin/antlr
 
 ADD source /autograder/source
 
-RUN cp /autograder/source/run_autograder /autograder/run_autograder
+RUN cp /autograder/source/run_autograder /autograder/run_autograder; \
+    cp -r /autograder/source/answers /autograder;
 
 # Ensure that scripts are Unix-friendly and executable
-RUN chmod +x /autograder/run_autograder
+RUN chmod +x /autograder/run_autograder; \
+     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
