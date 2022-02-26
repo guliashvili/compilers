@@ -1,6 +1,7 @@
 import json
-from helper import execute, executor, add_result, check_files, print_output
+from helper import execute, executor, add_result, check_files, print_output, generate_image_gv, upload_file
 from os.path import exists
+import uuid
 
 BAD_TESTS = ["bad_scan", "bad_parse1", "bad_parse2", "bad_parse3"];
 LEXER_TESTS = ["basic", "math1", "math2", "fib", "sort"]
@@ -23,7 +24,7 @@ def check_bad_test(f, _stdout, _stderr, retcode, _append_path):
   if retcode == expected_ret_code:
     return "Good Job", True
 
-  return f"Incorrect return code, expected {expected_ret_code} got {retcode}", False
+  return {"message": f"Incorrect return code, expected {expected_ret_code} got {retcode}"}, False
 
 
 def check_lexer_test(f, stdout, stderr, retcode, append_path):
@@ -46,7 +47,7 @@ def check_lexer_test(f, stdout, stderr, retcode, append_path):
 
     line += 1
 
-  return "Good job", True
+  return {"message": "Good job"}, True
 
 
 def check_parser_test(f, stdout, stderr, retcode, append_path):
@@ -55,10 +56,18 @@ def check_parser_test(f, stdout, stderr, retcode, append_path):
   if retcode != 0:
     return f"Incorrect return code, expected 0 got {retcode}", False
 
-  if not exists(append_path + f + ".gv"):
+  gv_f = append_path + f + ".gv"
+  if not exists(gv_f):
     return f"Can not find file {f}", False
 
-  return "Found file, it will be manually graded", True
+  ret, img_f = generate_image_gv(gv_f)
+  if ret != 0:
+    return f"Can not generate image of {gv_f}", False
+
+  url = upload_file(img_f)
+
+
+  return {"message": "Found file, it will be manually graded", url: url}, True
 
 
 def test_hw1(is_test):

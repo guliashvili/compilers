@@ -1,6 +1,11 @@
 import json
+import uuid
 from os import listdir
 from os.path import isfile, join
+import logging
+import boto3
+from botocore.exceptions import ClientError
+import os
 
 CPP = "C++"
 CPP_FILE = "submission/cs8803_bin/tigerc"
@@ -74,6 +79,33 @@ def execute(args, f):
   return run_thing(commands)
 
 
+def upload_file(file_name):
+    object_name = uuid.uuid1()
+    bucket = "compilers-h1"
+
+    # Upload the file
+    s3_client = boto3.client('s3')
+    try:
+        s3_client.upload_file(file_name, bucket, object_name)
+        return s3_client.generate_presigned_url('get_object',
+                                               Params={
+                                                   'Bucket': bucket,
+                                                   'Key': file_name,
+                                               },
+                                               ExpiresIn=10520000)
+    except ClientError as e:
+        logging.error(e)
+        return "Could not upload image"
+
+
+def generate_image_gv(file_name):
+    image_f = f"{file_name}.png"
+    _stdout, _stderr, ret = execute(["dot", "-Tpng", "-o", image_f, file_name])
+    if ret != 0:
+        return ret, ''
+    return ret, image_f
+
+
 def add_result(score, max_score, name, number, output):
   tests.append({
             "score": score,
@@ -105,7 +137,7 @@ def executor(files, checker, title, chapter, max_score, args, is_test, append_pa
                            "stdout": stdout.decode("utf-8"),
                            "stderr": stderr.decode("utf-8"),
                            "retcode": retcode,
-                           "message": message
+                           **message
                        },
                        indent=4, sort_keys=True)
                        )

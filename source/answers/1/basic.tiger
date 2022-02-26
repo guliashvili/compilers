@@ -1,9 +1,0 @@
-/* basic program */
-program basic
-let
-begin
-    function main() : int
-    begin
-        return 0;
-    end
-end

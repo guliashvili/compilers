@@ -1,5 +1,8 @@
 FROM gradescope/auto-builds:ubuntu-20.04
 
+ARG s3_prv_key
+ARG s3_pub_key
+
 RUN set -eux; \
 	apt update; \
 	apt install -y --no-install-recommends software-properties-common; \
@@ -47,6 +50,14 @@ RUN set -eux; \
 	&& cp * /usr/local/lib \
 	&& ldconfig
 
+RUN set -eux; \
+	apt install -y --no-install-recommends graphviz; \
+    pip install boto3; \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; \
+    unzip awscliv2.zip; \
+    ./aws/install; \
+    aws --profile default configure set aws_access_key_id "$s3_pub_key"; \
+    aws --profile default configure set aws_secret_access_key "$s3_prv_key";
 
 RUN set -eux; \
     echo '#!/bin/bash\nCLASSPATH=" /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
