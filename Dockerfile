@@ -63,18 +63,7 @@ RUN set -eux; \
     echo '#!/bin/bash\nCLASSPATH=" /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
     && chmod +x /usr/bin/antlr
 
-
-RUN set -eux; \
-    mkdir -p /autograder \
-    && cd /autograder  \
-    && git clone https://github.com/guliashvili/compilers \
-    && rm -rf source \
-    && mv compilers/source source \
-    && cd ..
-
-
-RUN cp /autograder/source/run_autograder /autograder/run_autograder; \
-    cp -r /autograder/source/answers /autograder;
+ADD source/run_autograder /autograder/run_autograder
 
 # Ensure that scripts are Unix-friendly and executable
 RUN chmod +x /autograder/run_autograder; \
