@@ -100,7 +100,7 @@ def upload_file(file_name):
 
 def generate_image_gv(file_name):
     image_f = f"{file_name}.png"
-    _stdout, _stderr, ret = execute(["dot", "-Tpng", "-o", image_f, file_name])
+    _stdout, _stderr, ret = execute(["dot", "-Tpng", "-o", file_name, image_f], None)
     if ret != 0:
         return ret, ''
     return ret, image_f

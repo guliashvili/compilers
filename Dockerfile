@@ -67,7 +67,8 @@ RUN set -eux; \
 RUN set -eux; \
     mkdir -p /autograder \
     && cd /autograder  \
-    &&  git clone https://github.com/guliashvili/compilers \
+    && git clone https://github.com/guliashvili/compilers \
+    && rm -rf source \
     && mv compilers/source source \
     && cd ..
 
