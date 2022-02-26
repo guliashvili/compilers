@@ -87,7 +87,7 @@ def upload_file(file_name):
     s3_client = boto3.client('s3')
     try:
         s3_client.upload_file(file_name, bucket, object_name)
-        location = boto3.client('s3').get_bucket_location(Bucket=bucket)['LocationConstraint']
+        location = 'us-east-2'
         return "https://s3-%s.amazonaws.com/%s/%s" % (location, bucket, object_name)
     except ClientError as e:
         logging.error(e)
