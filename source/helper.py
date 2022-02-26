@@ -120,12 +120,13 @@ def add_result(score, max_score, name, number, output):
 def executor(files, checker, title, chapter, max_score, args, is_test, append_path):
     counter = 1
     for f_name in files:
-        message, success = "Unknown Exception", False
+        message, success = '', False
         try:
             stdout, stderr, retcode = execute(args, append_path + f_name + ".tiger")
             if is_test:
                 message, success = checker(f_name, stdout, stderr, retcode, append_path)
-        except:
+        except Exception as e:
+            message = {"message": str(e)}
             pass
 
         if is_test:
