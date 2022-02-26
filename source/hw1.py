@@ -67,7 +67,7 @@ def check_parser_test(f, stdout, stderr, retcode, append_path):
   url = upload_file(img_f)
 
 
-  return {"message": "Found file, it will be manually graded", url: url}, True
+  return {"message": "Found file, it will be manually graded", "url": url}, True
 
 
 def test_hw1(is_test):

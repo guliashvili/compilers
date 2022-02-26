@@ -80,7 +80,7 @@ def execute(args, f):
 
 
 def upload_file(file_name):
-    object_name = uuid.uuid1()
+    object_name = str(uuid.uuid1())
     bucket = "compilers-h1"
 
     # Upload the file
@@ -100,7 +100,7 @@ def upload_file(file_name):
 
 def generate_image_gv(file_name):
     image_f = f"{file_name}.png"
-    _stdout, _stderr, ret = execute(["dot", "-Tpng", "-o", file_name, image_f], None)
+    _stdout, _stderr, ret = run_thing(["dot", "-Tpng", "-o", image_f, file_name], None)
     if ret != 0:
         return ret, ''
     return ret, image_f
