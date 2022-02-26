@@ -22,20 +22,20 @@ def check_error_code_1():
 def check_bad_test(f, _stdout, _stderr, retcode, _append_path):
   expected_ret_code = 3 if f.find("parse") != -1 else 2
   if retcode == expected_ret_code:
-    return "Good Job", True
+    return {"message": "Good Job"}, True
 
   return {"message": f"Incorrect return code, expected {expected_ret_code} got {retcode}"}, False
 
 
 def check_lexer_test(f, stdout, stderr, retcode, append_path):
   if retcode != 0:
-    return f"Incorrect return code, expected 0 got {retcode}", False
+    return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
 
   expected_lines = open(append_path.replace('source', 'answers') + f + ".tokens").read().split('\n')
   cur_lines = open(append_path + f + ".tokens").read().split('\n')
 
   if len(expected_lines) != len(cur_lines):
-    return f"Expected {expected_lines} tokens, got {cur_lines}", False
+    return {"message": f"Expected {expected_lines} tokens, got {cur_lines}"}, False
 
   line = 0
   for expected, cur in zip(expected_lines, cur_lines):
@@ -43,7 +43,7 @@ def check_lexer_test(f, stdout, stderr, retcode, append_path):
     cur = "".join(cur.split())
 
     if expected != cur:
-      return f"At line {line}, expected token {expected}, got {cur}", False
+      return {"message": f"At line {line}, expected token {expected}, got {cur}"}, False
 
     line += 1
 
@@ -54,15 +54,15 @@ def check_parser_test(f, stdout, stderr, retcode, append_path):
   from os.path import exists
 
   if retcode != 0:
-    return f"Incorrect return code, expected 0 got {retcode}", False
+    return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
 
   gv_f = append_path + f + ".gv"
   if not exists(gv_f):
-    return f"Can not find file {f}", False
+    return {"message": f"Can not find file {f}"}, False
 
   ret, img_f = generate_image_gv(gv_f)
   if ret != 0:
-    return f"Can not generate image of {gv_f}", False
+    return {"message": f"Can not generate image of {gv_f}"}, False
 
   url = upload_file(img_f)
 
