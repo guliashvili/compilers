@@ -87,12 +87,8 @@ def upload_file(file_name):
     s3_client = boto3.client('s3')
     try:
         s3_client.upload_file(file_name, bucket, object_name)
-        return s3_client.generate_presigned_url('get_object',
-                                               Params={
-                                                   'Bucket': bucket,
-                                                   'Key': file_name,
-                                               },
-                                               ExpiresIn=10520000)
+        location = boto3.client('s3').get_bucket_location(Bucket=bucket)['LocationConstraint']
+        return "https://s3-%s.amazonaws.com/%s/%s" % (location, bucket, object_name)
     except ClientError as e:
         logging.error(e)
         return "Could not upload image"
@@ -100,7 +96,7 @@ def upload_file(file_name):
 
 def generate_image_gv(file_name):
     image_f = f"{file_name}.png"
-    _stdout, _stderr, ret = run_thing(["dot", "-Tpng", "-o", image_f, file_name], None)
+    _stdout, _stderr, ret = run_thing(["dot", "-Tpng", "-o", image_f, file_name])
     if ret != 0:
         return ret, ''
     return ret, image_f
