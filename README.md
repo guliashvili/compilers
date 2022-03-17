@@ -1,0 +1,1 @@
+docker build -t gguliz/compilers:v1  --build-arg s3_pub_key="z" --build-arg s3_prv_key="z"

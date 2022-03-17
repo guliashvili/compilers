@@ -83,9 +83,8 @@ def upload_file(file_name):
     object_name = str(uuid.uuid1())
     bucket = "compilers-h1"
 
-    # Upload the file
-    s3_client = boto3.client('s3')
     try:
+        s3_client = boto3.client('s3')
         s3_client.upload_file(file_name, bucket, object_name)
         location = 'us-east-2'
         return "https://s3-%s.amazonaws.com/%s/%s" % (location, bucket, object_name)
