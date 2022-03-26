@@ -70,7 +70,7 @@ def execute(args, f):
   if executable_type == CPP:
     commands.append(CPP_FILE)
   else:
-    commands.extend(["javac", JAVA_FILE])
+    commands.extend(["java -jar", JAVA_FILE])
 
   commands.extend(args)
   if f is not None:
