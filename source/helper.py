@@ -112,7 +112,7 @@ def add_result(score, max_score, name, number, output):
         })
 
 
-def executor(files, checker, title, chapter, max_score, args, is_test, append_path):
+def executor(files, checker, title, chapter, max_score, args, is_test, append_path, overrides=None):
     counter = 1
     for f_name in files:
         message, success = '', False
@@ -124,9 +124,10 @@ def executor(files, checker, title, chapter, max_score, args, is_test, append_pa
             message = {"message": str(e)}
             pass
 
+        my_max_score = overrides[f_name] if overrides is not None and f_name in overrides else max_score
         if is_test:
-            add_result(max_score * int(success),
-                       max_score,
+            add_result(my_max_score * int(success),
+                       my_max_score,
                        f"{title}: {f_name}",
                        f"{chapter}.{counter}",
                        json.dumps({

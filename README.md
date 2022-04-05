@@ -1,3 +1,6 @@
+# Intro
+
+This is just to see how your code is being tested, you don't need to use or upload any of the code
 
 # Run autograder locally
 https://gradescope-autograders.readthedocs.io/en/latest/manual_docker/#running-autograder-images-locally

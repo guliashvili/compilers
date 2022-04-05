@@ -1,7 +1,9 @@
 FROM gradescope/auto-builds:ubuntu-20.04
+SHELL ["/bin/bash", "-c"]
 
 ARG s3_prv_key
 ARG s3_pub_key
+ARG hw
 
 RUN set -eux; \
 	apt update; \
@@ -39,8 +41,8 @@ RUN set -eux; \
 	&& cd antlr4 \
 	&& git checkout 4.9.3 \
  	&& mvn clean --projects tool --also-make \
-    	&& mvn -DskipTests install --projects tool --also-make \
-    	&& mv ./tool/target/antlr4-*-complete.jar /usr/local/lib/ \
+    && mvn -DskipTests install --projects tool --also-make \
+    && mv ./tool/target/antlr4-*-complete.jar /usr/local/lib/ \
 	&& cd runtime/Cpp && mkdir build && mkdir run && cd build \
 	&& cmake .. -DANTLR_JAR_LOCATION=/usr/local/lib/antlr4-4.9.3-complete.jar \
 	&& DESTDIR=../run make install \
@@ -63,8 +65,15 @@ RUN set -eux; \
     echo '#!/bin/bash\nCLASSPATH=" /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
     && chmod +x /usr/bin/antlr
 
+# Gradle
+RUN  apt-get install -y --no-install-recommends zip
+RUN curl -s "https://get.sdkman.io" | bash \
+    source "$HOME/.sdkman/bin/sdkman-init.sh" \
+    sdk install gradle
+
 ADD source/run_autograder /autograder/run_autograder
 
 # Ensure that scripts are Unix-friendly and executable
 RUN chmod +x /autograder/run_autograder; \
-     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    export HW="$s3_pub_key"
