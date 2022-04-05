@@ -67,8 +67,8 @@ RUN set -eux; \
 
 # Gradle
 RUN  apt-get install -y --no-install-recommends zip
-RUN curl -s "https://get.sdkman.io" | bash \
-    source "$HOME/.sdkman/bin/sdkman-init.sh" \
+RUN curl -s "https://get.sdkman.io" | bash; \
+    source "$HOME/.sdkman/bin/sdkman-init.sh"; \
     sdk install gradle
 
 ADD source/run_autograder /autograder/run_autograder

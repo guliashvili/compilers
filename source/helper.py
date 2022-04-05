@@ -8,12 +8,12 @@ from botocore.exceptions import ClientError
 import os
 
 CPP = "C++"
-CPP_FILE = "submission/cs8803_bin/tigerc"
+CPP_FILE = "../submission/cs8803_bin/tigerc"
 
 JAVA = "JAVA"
-JAVA_FILE = "submission/cs8803_bin/tigerc.jar"
+JAVA_FILE = "../submission/cs8803_bin/tigerc.jar"
 
-G4_FILE = "submission/Tiger.g4"
+G4_FILE = "../submission/Tiger.g4"
 
 tests = []
 
@@ -27,7 +27,7 @@ def print_output(score, execution_time, output):
     "tests": tests
   }
 
-  with open("results/results.json", "w") as f:
+  with open("../results/results.json", "w") as f:
     f.write(json.dumps(output,indent=4, sort_keys=True))
 
   quit()
@@ -112,12 +112,15 @@ def add_result(score, max_score, name, number, output):
         })
 
 
-def executor(files, checker, title, chapter, max_score, args, is_test, append_path, overrides=None):
+def executor(files, checker, title, chapter, max_score, args, is_test, append_path, overrides=None, save_err=None):
     counter = 1
     for f_name in files:
         message, success = '', False
         try:
             stdout, stderr, retcode = execute(args, append_path + f_name + ".tiger")
+            if save_err:
+                with open(f"../results/{f_name}.err", "w") as f:
+                    f.write(stderr.decode("utf-8"))
             if is_test:
                 message, success = checker(f_name, stdout, stderr, retcode, append_path)
         except Exception as e:

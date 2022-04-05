@@ -15,11 +15,11 @@ def check_error_code_1():
 
     max_score = 3
     if exit_code3 == exit_code2 and exit_code2 == exit_code1 and exit_code1 == 1:
-        current_score = max_score
-        out = f'Expected error code 1, but got {exit_code1}, {exit_code2}, {exit_code3}'
-    else:
         current_score = 0
         out = "Good job"
+    else:
+        current_score = max_score
+        out = f'Expected error code 1, but got {exit_code1}, {exit_code2}, {exit_code3}'
 
     add_result(current_score, max_score, "Check invalid commands", "1.1", out)
 

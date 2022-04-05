@@ -1,0 +1,4 @@
+line 6:32 Function argument can not be array
+line 8:19 ID y is not defined
+line 8:8 You can not return value when function has no return type and vice versa
+line 17:17 Different amount of arguments

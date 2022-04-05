@@ -1,0 +1,2 @@
+line 10:13 Name _f_addIt is already defined in this scope
+Assertion failed: (function_var.has_value()), function START_FUNCTION, file IR.h, line 423.

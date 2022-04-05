@@ -7,6 +7,5 @@ cd ../
 mkdir -p results
 git clone https://github.com/guliashvili/compilers
 mv compilers/source .
-mv source/answers .
 
 python3 source/main.py

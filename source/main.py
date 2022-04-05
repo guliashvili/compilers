@@ -1,5 +1,6 @@
 from helper import check_files, print_output
 from hw1 import test_hw1
+from hw2 import test_hw2
 import os
 
 def main():
@@ -10,6 +11,7 @@ def main():
   if hw == '1':
     test_hw1(True)
   elif hw == '2':
+    test_hw2(True)
     pass
   else:
     pass
