@@ -9,7 +9,9 @@ https://gradescope-autograders.readthedocs.io/en/latest/manual_docker/#running-a
 # Cheatsheet 
 
 ## Build
-```docker build -t compilerhw1 --build-arg s3_pub_key="z" --build-arg s3_prv_key="z"```
+```
+docker buildx build --platform linux/amd64 . -t zz:h2  --build-arg s3_pub_key="z" --build-arg s3_prv_key="z"  --progress=plain  --build-arg hw="2"
+docker build -t compilerhw1 --build-arg s3_pub_key="z" --build-arg s3_prv_key="z"```
 
 ## Run docker and connect bash
 ```docker run -it  compilerhw1  bash```

@@ -1,5 +1,4 @@
 FROM gradescope/auto-builds:ubuntu-20.04
-SHELL ["/bin/bash", "-c"]
 
 ARG s3_prv_key
 ARG s3_pub_key
@@ -65,11 +64,6 @@ RUN set -eux; \
     echo '#!/bin/bash\nCLASSPATH=" /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
     && chmod +x /usr/bin/antlr
 
-# Gradle
-RUN  apt-get install -y --no-install-recommends zip
-RUN curl -s "https://get.sdkman.io" | bash; \
-    source "$HOME/.sdkman/bin/sdkman-init.sh"; \
-    sdk install gradle
 
 ADD source/run_autograder /autograder/run_autograder
 
