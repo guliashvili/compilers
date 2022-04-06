@@ -4,8 +4,9 @@ cd submission
 ls
 make
 cd ../
-mkdir -p results
+mkdir results
 git clone https://github.com/guliashvili/compilers
 mv compilers/source .
+cd source
 
-python3 source/main.py
+python3 main.py
