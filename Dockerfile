@@ -3,6 +3,7 @@ FROM gradescope/auto-builds:ubuntu-20.04
 ARG s3_prv_key
 ARG s3_pub_key
 ARG hw
+ENV hw=$hw
 
 RUN set -eux; \
 	apt update; \
@@ -69,5 +70,4 @@ ADD source/run_autograder /autograder/run_autograder
 
 # Ensure that scripts are Unix-friendly and executable
 RUN chmod +x /autograder/run_autograder; \
-     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    export HW="$s3_pub_key"
+     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

@@ -6,7 +6,6 @@ make
 cd ../
 mkdir results
 git clone https://github.com/guliashvili/compilers
-mv compilers/source .
-cd source
+cd compilers
 
-python3 main.py
+python3 source/main.py
