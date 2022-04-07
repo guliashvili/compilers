@@ -1,2 +1,3 @@
 line 6:26 Return type can not be array
-Assertion failed: (function_var.has_value()), function START_FUNCTION, file IR.h, line 423.
+line 11:12 You can not return value when function has no return type and vice versa
+line 17:8 ID _f_getArray is not defined
