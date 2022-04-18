@@ -6,4 +6,5 @@ results
 submission
 *.s
 *.gv
+*.ir
 source/**/*.tokens

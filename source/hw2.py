@@ -113,8 +113,8 @@ def check_st_test(f, _stdout, _stderr, retcode, append_path):
 
 def test_hw2(is_test):
     check_files_hw2()
-    executor(SEMANTIC_TESTS, check_semantic_test, "Semantic Test", "2", 1, [], is_test, "source/2/semantic_tests_v2/", None, not is_test)
-    executor(IR_TESTS, check_ir_test, "IR Test", "3", 1, ["--ir"], is_test, "source/2/tiger_tests_v3/", {t: .5 for t in IR_TESTS[:2]})
+    executor(SEMANTIC_TESTS, check_semantic_test, "Semantic Test", "2", 1, [], is_test, "source/2/semantic_tests_v2/", {t: .5 for t in SEMANTIC_TESTS[:1]}, not is_test)
+    executor(IR_TESTS, check_ir_test, "IR Test", "3", 1, ["--ir"], is_test, "source/2/tiger_tests_v3/", {t: .5 for t in IR_TESTS[:5]})
     # executor(ST_TESTS, check_st_test, "Symbol Table Test", "2", 0, ["--st"], is_test, "source/2/")
 
     # check_error_code_1()
