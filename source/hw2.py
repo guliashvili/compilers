@@ -108,14 +108,22 @@ def check_ir_test(f, _stdout, _stderr, retcode, append_path):
 def check_st_test(f, _stdout, _stderr, retcode, append_path):
     if retcode != 0:
         return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
-    pass
+
+    with open(os.path.join(append_path, f"{f}.st"), "r") as fff:
+        content = list(filter(None, fff.read().split('\n')))
+
+    if len(content) == 0:
+        return {"message": f"No content found return code, expected something"}, False
+
+    return {"only_message": content}, True
+
 
 
 def test_hw2(is_test):
     check_files_hw2()
     executor(SEMANTIC_TESTS, check_semantic_test, "Semantic Test", "2", 1, [], is_test, "source/2/semantic_tests_v2/", {t: .5 for t in SEMANTIC_TESTS[:1]}, not is_test)
     executor(IR_TESTS, check_ir_test, "IR Test", "3", 1, ["--ir"], is_test, "source/2/tiger_tests_v3/", {t: .5 for t in IR_TESTS[:10]})
-    # executor(ST_TESTS, check_st_test, "Symbol Table Test", "2", 0, ["--st"], is_test, "source/2/")
+    executor(ST_TESTS, check_st_test, "Symbol Table Manually Graded Test", "4", 0, ["--st"], is_test, "source/2/tiger_tests_v3/")
 
     # check_error_code_1()
     # executor(BAD_TESTS, check_bad_test, "Bad", "2", 3, [], is_test, "source/1/")
