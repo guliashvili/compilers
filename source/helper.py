@@ -111,7 +111,6 @@ def add_result(score, max_score, name, number, output):
             "visibility": "visible",
         })
 
-
 def executor(files, checker, title, chapter, max_score, args, is_test, append_path, overrides=None, save_err=None):
     counter = 1
     for f_name in files:
