@@ -128,7 +128,7 @@ def executor(files, checker, title, chapter, max_score, args, is_test, append_pa
 
         my_max_score = overrides[f_name] if overrides is not None and f_name in overrides else max_score
         if is_test:
-            dump =  json.dumps({
+            dump = json.dumps({
                            "stdout": stdout.decode("utf-8"),
                            "stderr": stderr.decode("utf-8"),
                            "retcode": retcode,

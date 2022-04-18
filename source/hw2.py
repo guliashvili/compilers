@@ -110,7 +110,7 @@ def check_st_test(f, _stdout, _stderr, retcode, append_path):
         return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
 
     with open(os.path.join(append_path, f"{f}.st"), "r") as fff:
-        content = list(filter(None, fff.read().split('\n')))
+        content = fff.read().strip()
 
     if len(content) == 0:
         return {"message": f"No content found return code, expected something"}, False

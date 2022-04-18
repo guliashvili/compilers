@@ -7,4 +7,5 @@ submission
 *.s
 *.gv
 *.ir
+*.st
 source/**/*.tokens

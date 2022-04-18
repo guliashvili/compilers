@@ -4,7 +4,7 @@ cd submission
 ls
 make
 cd ../
-mkdir results
+mkdir -p results
 git clone https://github.com/guliashvili/compilers
 cd compilers
 
