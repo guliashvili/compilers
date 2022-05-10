@@ -42,12 +42,13 @@ ST_TESTS = ["demo_slope", "demo_square_root", "basic_scope_global", "basic_scope
 
 def check_files_hw2():
     max_score = .5
-    report = exists('../submission/phase2_design.pdf')
+    f = 'phase2_design.pdf'
+    report = exists(f'../submission/{f}')
     executables = check_files()
 
     if not report:
         score = 0
-        out = "No report found"
+        out = f"No report file {f} found"
     elif executables:
         score = 0
         out = "No executable or grammar found"
@@ -74,6 +75,7 @@ def check_semantic_test(f, _stdout, stderr, retcode, append_path):
     expected_lines = list(sorted(list(filter(None, list(map(flt, expected_lines))))))
     cur_lines = list(sorted(list(filter(None, list(map(flt, cur_lines))))))
 
+    i = 0
     for line in range(max(len(cur_lines), len(expected_lines))):
         if line >= len(expected_lines):
             return {"message": f"There are less errors expected than found, last error that was not expected is {cur_lines[line]}"}, False
@@ -82,8 +84,8 @@ def check_semantic_test(f, _stdout, stderr, retcode, append_path):
 
         expected, cur = expected_lines[line], cur_lines[line]
         if expected != cur:
-            return {"message": f"In sorted list of errors, next error was expected {expected}..., but got {cur}..."}, False
-
+            return {"message": f"In sorted list of errors, at position {i}, next error was expected {expected}, but got {cur}"}, False
+        i += 1
     return {"message": "Good job"}, True
 
 
