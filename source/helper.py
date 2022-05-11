@@ -1,11 +1,8 @@
 import json
 import uuid
-from os import listdir
-from os.path import isfile, join
 import logging
 import boto3
 from botocore.exceptions import ClientError
-import os
 
 CPP = "C++"
 CPP_FILE = "../submission/cs8803_bin/tigerc"
@@ -63,7 +60,7 @@ def run_thing(commands):
 
   return stdout, stderr, process.returncode
 
-def execute(args, f):
+def execute(args, f, irf):
   commands = []
 
   executable_type = get_type()
@@ -75,7 +72,8 @@ def execute(args, f):
   commands.extend(args)
   if f is not None:
       commands.extend(['-i', f])
-
+  if irf is not None:
+      commands.extend(['-r', irf])
   return run_thing(commands)
 
 
@@ -111,12 +109,17 @@ def add_result(score, max_score, name, number, output):
             "visibility": "visible",
         })
 
-def executor(files, checker, title, chapter, max_score, args, is_test, append_path, overrides=None, save_err=None):
+def executor(files, checker, title, chapter, max_score, args, is_test, append_path, overrides=None, save_err=None, ir_files=None):
     counter = 1
-    for f_name in files:
+    for i, f_name in enumerate(files):
         message, success = '', False
         try:
-            stdout, stderr, retcode = execute(args, append_path + f_name + ".tiger")
+            if ir_files is not None:
+                ir_f = ir_files[i]
+            else:
+                ir_f = None
+
+            stdout, stderr, retcode = execute(args, append_path + f_name + ".tiger", ir_f)
             if save_err:
                 with open(f"../results/{f_name}.err", "w") as f:
                     f.write(stderr.decode("utf-8"))

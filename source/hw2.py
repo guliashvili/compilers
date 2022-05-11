@@ -1,9 +1,7 @@
-import json
 import os.path
 
-from helper import execute, executor, add_result, check_files, print_output, generate_image_gv, upload_file, run_thing
+from helper import executor, add_result, check_files, run_thing
 from os.path import exists
-import uuid
 
 # ls -l1 | sort -n |  awk '{print "\""$0"\","}' | tr -d "\n"
 SEMANTIC_TESTS = ["1_err_undefined_var", "2_err_undefined_type", "3_err_undefined_function",
@@ -126,8 +124,3 @@ def test_hw2(is_test):
     executor(SEMANTIC_TESTS, check_semantic_test, "Semantic Test", "2", 1, [], is_test, "source/2/semantic_tests_v2/", {t: .5 for t in SEMANTIC_TESTS[:1]}, not is_test)
     executor(IR_TESTS, check_ir_test, "IR Test", "3", 1, ["--ir"], is_test, "source/2/tiger_tests_v3/", {t: .5 for t in IR_TESTS[:10]})
     executor(ST_TESTS, check_st_test, "Symbol Table Manually Graded Test", "4", 0, ["--st"], is_test, "source/2/tiger_tests_v3/")
-
-    # check_error_code_1()
-    # executor(BAD_TESTS, check_bad_test, "Bad", "2", 3, [], is_test, "source/1/")
-    # executor(LEXER_TESTS, check_lexer_test, "Lexer", "3", 2, ["-l"], is_test, "source/1/")
-    # executor(PARSER_TESTS, check_parser_test, "Parser Manually Graded", "4", 0, ["-l", "-p"], is_test, "source/1/")

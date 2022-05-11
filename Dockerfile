@@ -53,7 +53,7 @@ RUN set -eux; \
 	&& ldconfig
 
 RUN set -eux; \
-	apt install -y --no-install-recommends graphviz; \
+	apt install -y --no-install-recommends graphviz spim; \
     pip install boto3; \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; \
     unzip awscliv2.zip; \

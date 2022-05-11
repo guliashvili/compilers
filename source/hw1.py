@@ -1,7 +1,4 @@
-import json
-from helper import execute, executor, add_result, check_files, print_output, generate_image_gv, upload_file
-from os.path import exists
-import uuid
+from helper import execute, executor, add_result, generate_image_gv, upload_file
 
 BAD_TESTS = ["bad_scan", "bad_parse1", "bad_parse2", "bad_parse3"];
 LEXER_TESTS = ["basic", "math1", "math2", "fib", "sort"]
