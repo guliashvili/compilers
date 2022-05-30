@@ -36,20 +36,23 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 
-RUN set -eux; \
-	git clone https://github.com/antlr/antlr4.git \
+RUN git clone https://github.com/antlr/antlr4.git \
 	&& cd antlr4 \
 	&& git checkout 4.10.1 \
  	&& mvn clean --projects tool --also-make \
-    && mvn -DskipTests install --projects tool --also-make \
-    && mv ./tool/target/antlr4-*-complete.jar /usr/local/lib/ \
+    && mvn -DskipTests install --projects tool --also-make
+
+
+
+RUN cd antlr4 \
+	&& mv ./tool/target/antlr4-*-complete.jar /usr/local/lib/ \
 	&& cd runtime/Cpp && mkdir build && mkdir run && cd build \
-	&& cmake .. -DANTLR_JAR_LOCATION=/usr/local/lib/antlr4-4.9.3-complete.jar \
+	&& cmake .. -DANTLR_JAR_LOCATION=/usr/local/lib/antlr4-4.10.1-complete.jar \
 	&& DESTDIR=../run make install \
 	&& cd ../run/usr/local/include \
 	&& cp -r antlr4-runtime /usr/local/include \
 	&& cd ../lib \
-	&& cp * /usr/local/lib \
+	&& cp -r * /usr/local/lib \
 	&& ldconfig
 
 RUN set -eux; \
