@@ -19,9 +19,11 @@ IR_TESTS = ["array_assign", "array_basic_ops", "array_basic_ops_static", "array_
             "function_recursive_6_arg", "function_recursive_factorial", "function_recursive_fib",
             "lib_call_exit", "lib_call_not", "lib_call_printf", "lib_call_printi"]
 
-ST_TESTS = ["demo_slope", "demo_square_root", "basic_scope_global", "basic_scope_hiding",
-            "demo_jacobi"]
+CFG_TESTS = ["demo_selection_sort", "demo_motor"]
 
+LIVENESS_TESTS = ["demo_selection_sort", "demo_motor", ]
+
+ALLOCATION_TESTS = ["benchmark1", "benchmark2", "demo_selection_sort", "demo_motor", "demo_priority_queue", "demo_tak"]
 
 def check_files_hw3():
     max_score = .1
@@ -64,17 +66,6 @@ def check_naive_test(f, _stdout, _stderr, retcode, append_path):
     return {"message": "Good job"}, True
 
 
-def check_st_test(f, _stdout, _stderr, retcode, append_path):
-    if retcode != 0:
-        return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
-
-    with open(os.path.join(append_path, f"{f}.st"), "r") as fff:
-        content = fff.read().strip()
-
-    if len(content) == 0:
-        return {"message": f"No content found return code, expected something"}, False
-
-    return {"only_message": content}, True
 
 
 

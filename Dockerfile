@@ -39,7 +39,7 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 RUN set -eux; \
 	git clone https://github.com/antlr/antlr4.git \
 	&& cd antlr4 \
-	&& git checkout 4.9.3 \
+	&& git checkout 4.10.1 \
  	&& mvn clean --projects tool --also-make \
     && mvn -DskipTests install --projects tool --also-make \
     && mv ./tool/target/antlr4-*-complete.jar /usr/local/lib/ \
