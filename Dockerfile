@@ -47,7 +47,7 @@ RUN git clone https://github.com/antlr/antlr4.git \
 RUN cd antlr4 \
 	&& mv ./tool/target/antlr4-*-complete.jar /usr/local/lib/ \
 	&& cd runtime/Cpp && mkdir build && mkdir run && cd build \
-	&& cmake .. -DANTLR_JAR_LOCATION=/usr/local/lib/antlr4-4.10.1-complete.jar \
+	&& cmake .. -DANTLR_JAR_LOCATION=/usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar \
 	&& DESTDIR=../run make install \
 	&& cd ../run/usr/local/include \
 	&& cp -r antlr4-runtime /usr/local/include \
@@ -65,7 +65,7 @@ RUN set -eux; \
     aws --profile default configure set aws_secret_access_key "$s3_prv_key";
 
 RUN set -eux; \
-    echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.9.3-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.3-complete.jar "$@"' > /usr/bin/antlr \
+    echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
     && chmod +x /usr/bin/antlr
 
 
