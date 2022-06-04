@@ -38,7 +38,7 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 
 RUN git clone https://github.com/antlr/antlr4.git \
 	&& cd antlr4 \
-	&& git checkout 4.10.1 \
+	&& git checkout 4.9.3 \
  	&& mvn clean --projects tool --also-make \
     && mvn -DskipTests install --projects tool --also-make
 
@@ -65,7 +65,7 @@ RUN set -eux; \
     aws --profile default configure set aws_secret_access_key "$s3_prv_key";
 
 RUN set -eux; \
-    echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.10.1-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.10.1-complete.jar "$@"' > /usr/bin/antlr \
+    echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.9.3-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.3-complete.jar "$@"' > /usr/bin/antlr \
     && chmod +x /usr/bin/antlr
 
 
