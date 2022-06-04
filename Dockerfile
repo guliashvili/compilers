@@ -65,7 +65,7 @@ RUN set -eux; \
     aws --profile default configure set aws_secret_access_key "$s3_prv_key";
 
 RUN set -eux; \
-    echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.10.1-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.10.1-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
+    echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.10.1-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.10.1-complete.jar "$@"' > /usr/bin/antlr \
     && chmod +x /usr/bin/antlr
 
 
