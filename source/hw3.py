@@ -1,6 +1,6 @@
 import os.path
 
-from helper import executor, add_result, check_files, run_thing
+from helper import executor, add_result, check_files, run_thing, generate_image_gv, upload_file
 from os.path import exists
 
 # ls -l1 | sort -n |  awk '{print "\""$0"\","}' | tr -d "\n"
@@ -66,12 +66,47 @@ def check_naive_test(f, _stdout, _stderr, retcode, append_path):
     return {"message": "Good job"}, True
 
 
+def check_cfg_test(f, _stdout, _stderr, retcode, append_path):
+    if retcode != 0:
+        return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
+    gv_f = append_path + f + ".gv"
+    if not exists(gv_f):
+        return {"message": f"Can not find file {f}"}, False
+
+    ret, img_f = generate_image_gv(gv_f)
+    if ret != 0:
+        return {"message": f"Can not generate image of {gv_f}"}, False
+
+    url = upload_file(img_f)
+
+    return {"message": "Found file, it will be manually graded", "url": url}, True
 
 
+
+def check_liveness_test(f, _stdout, _stderr, retcode, append_path):
+    if retcode != 0:
+        return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
+
+    with open(os.path.join(append_path, f"{f}.liveness"), "r") as fff:
+        content = fff.read().strip()
+
+    if len(content) == 0:
+        return {"message": f"No content found return code, expected something"}, False
+
+    return {"only_message": content}, True
+
+
+def extract_needed_tests(needed_tests, to_extract):
+    return list(filter(lambda x: any(map(lambda needed_name: needed_name in x, needed_tests)) , to_extract))
 
 def test_hw3(is_test):
     check_files_hw3()
     ir_files = map(lambda f: f'source/3/ir/{f}.ir' , IR_TESTS)
     executor(IR_TESTS, check_naive_test, "Naive Test", "2", 1, ["-n", "--mips"], is_test, "source/3/tiger/", {t: .9 for t in IR_TESTS[:1]}, ir_files)
-    # executor(ST_TESTS, check_st_test, "Symbol Table Manually Graded Test", "4", 0, ["--st"], is_test, "source/2/tiger_tests_v3/")
 
+    CFG_LIVENESS_TESTS = ('demo_selection_sort', 'demo_motor')
+    cfg_liveness_code_files = extract_needed_tests(CFG_LIVENESS_TESTS, IR_TESTS)
+    cfg_liveness_ir_files = extract_needed_tests(CFG_LIVENESS_TESTS, ir_files)
+
+    executor(cfg_liveness_code_files, check_cfg_test, "CFG Test", "3", 0, ["-b", "--cfg"], is_test, "source/3/tiger/", None, cfg_liveness_ir_files)
+    executor(cfg_liveness_code_files, check_liveness_test, "Liveness Test", "4", 0, ["-g", "--liveness"], is_test, "source/3/tiger/", None, cfg_liveness_ir_files)
