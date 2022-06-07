@@ -68,8 +68,9 @@ RUN set -eux; \
     echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
     && chmod +x /usr/bin/antlr;
 
-RUN set -eux; \
-    git clone https://github.com/portersrc/spim-keepstats \
+RUN set -eux;  \
+    apt install -y --no-install-recommends flex bison \
+    && git clone https://github.com/portersrc/spim-keepstats \
     && cd spim-keepstats/spim \
     && make \
     && make install;
