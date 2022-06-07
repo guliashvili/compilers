@@ -8,10 +8,10 @@ https://gradescope-autograders.readthedocs.io/en/latest/manual_docker/#running-a
 
 # Cheatsheet 
 
-## Use without no Docker
+## Use without Docker
 
 ```
-Structure 
+File Structure 
 
 /compilers/ # this repo
 /submission # built homework
@@ -19,7 +19,10 @@ Structure
         tigerc or tigerc.jar
 /results # empty table
 ```
+
 ```
+Bash Commands
+
 cd compilers
 python3 source/main.py hw=2
 
@@ -27,13 +30,19 @@ python3 source/main.py hw=2
 
 ## Docker Build
 ```
-docker buildx build --platform linux/amd64 . -t zz:h2  --build-arg s3_pub_key="z" --build-arg s3_prv_key="z"  --progress=plain  --build-arg hw="2"
-
+docker buildx build --platform linux/amd64 . -t {image_name}  --build-arg s3_pub_key="z" --build-arg s3_prv_key="z"  --progress=plain  --build-arg hw="{homework number 1|2|3}"
+```
 ## Run docker and connect bash
-```docker run -it  compilerhw1  bash```
+```
+docker run -it  {image_name}  bash
+```
 
-## List running dockers
-```docker ps```
+## List running dockers to find {container_id}
+```
+docker ps
+```
 
 ## Copy in docker
-```docker cp ~/PycharmProjects/compilers/submission {container_id}://autograder```
+```
+docker cp ~/PycharmProjects/compilers/submission {container_id}://autograder
+```
