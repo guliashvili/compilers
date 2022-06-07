@@ -56,7 +56,7 @@ RUN cd antlr4 \
 	&& ldconfig
 
 RUN set -eux; \
-	apt install -y --no-install-recommends graphviz spim; \
+	apt install -y --no-install-recommends graphviz; \
     pip install boto3; \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"; \
     unzip awscliv2.zip; \
@@ -66,8 +66,13 @@ RUN set -eux; \
 
 RUN set -eux; \
     echo '#!/bin/bash\nCLASSPATH="/usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar:." exec "java" -jar  /usr/local/lib/antlr4-4.9.4-SNAPSHOT-complete.jar "$@"' > /usr/bin/antlr \
-    && chmod +x /usr/bin/antlr
+    && chmod +x /usr/bin/antlr;
 
+RUN set -eux; \
+    git clone https://github.com/portersrc/spim-keepstats \
+    && cd spim-keepstats\spim \
+    && make \
+    && make install;
 
 ADD source/run_autograder /autograder/run_autograder
 
