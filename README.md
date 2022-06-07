@@ -8,10 +8,10 @@ https://gradescope-autograders.readthedocs.io/en/latest/manual_docker/#running-a
 
 # Cheatsheet 
 
-## Use without no Docker
+## Use without Docker
 
 ```
-Structure 
+File Structure 
 
 /compilers/ # this repo
 /submission # built homework
