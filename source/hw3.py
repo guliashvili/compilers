@@ -121,7 +121,7 @@ def check_benchmark(asm_type, f, _stdout, _stderr, retcode, append_path):
 
     ret = run_thing(['spim', '-keepstats', '-file', os.path.join(append_path, f'{f}.{asm_type}.s')])
     ret = ret[0].decode("utf-8")
-    ret = '\n'.join(ret.split('\n')[1:])[-1]
+    ret = list(filter(None, ret.split('\n')))[-1]
 
     save[f] += asm_type + ' : ' + ret + " " + 'CORRECT Program' if correct else 'INCORRECT Program, CHECK IT' + '\n'
 
