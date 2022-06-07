@@ -70,7 +70,7 @@ def check_naive_test(f, _stdout, _stderr, retcode, append_path):
 def check_cfg_test(f, _stdout, _stderr, retcode, append_path):
     if retcode != 0:
         return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
-    f += 'cfg.gv'
+    f += '.cfg.gv'
     gv_f = append_path + f
     if not exists(gv_f):
         return {"message": f"Can not find file {f}"}, False
