@@ -1,5 +1,5 @@
 import os.path
-
+import collections
 from helper import executor, add_result, check_files, run_thing, generate_image_gv, upload_file
 from os.path import exists
 from functools import partial
@@ -102,8 +102,30 @@ def extract_needed_tests(needed_tests, to_extract):
     return list(filter(lambda x: any(map(lambda needed_name: needed_name in x, needed_tests)) , to_extract))
 
 
-def benchmark():
-    pass
+save = collections.defaultdict(str)
+NAIVE = 'naive'
+IB = 'ib'
+BRIGGS = 'briggs'
+
+def check_benchmark(asm_type, f, _stdout, _stderr, retcode, append_path):
+    if retcode != 0:
+        return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
+
+    ret = run_thing(['spim', '-file', os.path.join(append_path, f'{f}.{asm_type}.s')])
+    ret = ret[0].decode("utf-8")
+    ret = '\n'.join(ret.split('\n')[1:])
+    with open(os.path.join(append_path.replace('source', 'answers'), f"{f}.native_answer"), "r") as fff:
+        content = fff.read().split('\n')
+
+    correct = ret == content
+
+    ret = run_thing(['spim', '-keepstats', '-file', os.path.join(append_path, f'{f}.{asm_type}.s')])
+    ret = ret[0].decode("utf-8")
+    ret = '\n'.join(ret.split('\n')[1:])[-1]
+
+    save[f] += asm_type + ' : ' + ret + " " + 'CORRECT Program' if correct else 'INCORRECT Program, CHECK IT' + '\n'
+
+    return {"only_message": save[f]}, True
 
 
 def test_hw3(is_test):
@@ -122,4 +144,9 @@ def test_hw3(is_test):
     benchmark_code_files = extract_needed_tests(BENCHMARK_TESTS, IR_TESTS)
     benchmark_ir_files = extract_needed_tests(BENCHMARK_TESTS, ir_files)
 
-    # executor(benchmark_code_files, check_cfg_test, "CFG Test", "3", 0, ["-b", "--cfg"], False, "source/3/tiger/", None, benchmark_ir_files)
+    executor(benchmark_code_files,  partial(check_benchmark, NAIVE), "", "4", 0, ["-n", "--mips"], False,
+             "source/3/tiger/", None, benchmark_ir_files)
+    executor(benchmark_code_files, partial(check_benchmark, IB), "", "4", 0, ["-b", "--mips"], False,
+             "source/3/tiger/", None, benchmark_ir_files)
+    executor(benchmark_code_files, partial(check_benchmark, BRIGGS), "Benchmark Test", "4", 0, ["-g", "--mips"], True,
+         "source/3/tiger/", None, benchmark_ir_files)
