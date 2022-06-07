@@ -130,7 +130,7 @@ def check_benchmark(asm_type, f, _stdout, _stderr, retcode, append_path):
 
 def test_hw3(is_test):
     check_files_hw3()
-    ir_files = map(lambda f: f'source/3/ir/{f}.ir', IR_TESTS)
+    ir_files = list(map(lambda f: f'source/3/ir/{f}.ir', IR_TESTS))
     executor(IR_TESTS, check_naive_test, "Naive Test", "2", 1, ["-n", "--mips"], is_test, "source/3/tiger/", {t: .9 for t in IR_TESTS[:1]}, ir_files)
 
     CFG_LIVENESS_TESTS = ('demo_selection_sort', 'demo_motor')
@@ -145,8 +145,8 @@ def test_hw3(is_test):
     benchmark_ir_files = extract_needed_tests(BENCHMARK_TESTS, ir_files)
 
     executor(benchmark_code_files,  partial(check_benchmark, NAIVE), "", "4", 0, ["-n", "--mips"], is_test,
-             "source/3/tiger/", None, benchmark_ir_files, True)
+             "source/3/tiger/", None, benchmark_ir_files, skip_print=True)
     executor(benchmark_code_files, partial(check_benchmark, IB), "", "4", 0, ["-b", "--mips"], is_test,
-             "source/3/tiger/", None, benchmark_ir_files, True)
+             "source/3/tiger/", None, benchmark_ir_files, skip_print=True)
     executor(benchmark_code_files, partial(check_benchmark, BRIGGS), "Benchmark Test", "4", 0, ["-g", "--mips"], is_test,
-         "source/3/tiger/", None, benchmark_ir_files, False)
+         "source/3/tiger/", None, benchmark_ir_files)

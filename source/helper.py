@@ -126,7 +126,6 @@ def executor(files, checker, title, chapter, max_score, args, is_test, append_pa
             if is_test:
                 message, success = checker(f_name, stdout, stderr, retcode, append_path)
         except Exception as e:
-            print(e)
             message = {"message": str(e)}
 
         my_max_score = overrides[f_name] if overrides is not None and f_name in overrides else max_score
