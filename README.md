@@ -33,10 +33,16 @@ python3 source/main.py hw=2
 docker buildx build --platform linux/amd64 . -t {image_name}  --build-arg s3_pub_key="z" --build-arg s3_prv_key="z"  --progress=plain  --build-arg hw="{homework number 1|2|3}"
 
 ## Run docker and connect bash
-```docker run -it  {image_name}  bash```
+```
+docker run -it  {image_name}  bash
+```
 
 ## List running dockers to find {container_id}
-```docker ps```
+```
+docker ps
+```
 
 ## Copy in docker
-```docker cp ~/PycharmProjects/compilers/submission {container_id}://autograder```
+```
+docker cp ~/PycharmProjects/compilers/submission {container_id}://autograder
+```
