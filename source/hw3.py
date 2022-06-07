@@ -2,6 +2,7 @@ import os.path
 
 from helper import executor, add_result, check_files, run_thing, generate_image_gv, upload_file
 from os.path import exists
+from functools import partial
 
 # ls -l1 | sort -n |  awk '{print "\""$0"\","}' | tr -d "\n"
 IR_TESTS = ["array_assign", "array_basic_ops", "array_basic_ops_static", "array_combo_ops",
@@ -69,7 +70,8 @@ def check_naive_test(f, _stdout, _stderr, retcode, append_path):
 def check_cfg_test(f, _stdout, _stderr, retcode, append_path):
     if retcode != 0:
         return {"message": f"Incorrect return code, expected 0 got {retcode}"}, False
-    gv_f = append_path + f + ".gv"
+    f += 'cfg.gv'
+    gv_f = append_path + f
     if not exists(gv_f):
         return {"message": f"Can not find file {f}"}, False
 
@@ -99,6 +101,11 @@ def check_liveness_test(f, _stdout, _stderr, retcode, append_path):
 def extract_needed_tests(needed_tests, to_extract):
     return list(filter(lambda x: any(map(lambda needed_name: needed_name in x, needed_tests)) , to_extract))
 
+
+def benchmark():
+    pass
+
+
 def test_hw3(is_test):
     check_files_hw3()
     ir_files = map(lambda f: f'source/3/ir/{f}.ir' , IR_TESTS)
@@ -110,3 +117,9 @@ def test_hw3(is_test):
 
     executor(cfg_liveness_code_files, check_cfg_test, "CFG Test", "3", 0, ["-b", "--cfg"], is_test, "source/3/tiger/", None, cfg_liveness_ir_files)
     executor(cfg_liveness_code_files, check_liveness_test, "Liveness Test", "4", 0, ["-g", "--liveness"], is_test, "source/3/tiger/", None, cfg_liveness_ir_files)
+
+    BENCHMARK_TESTS = ('benchmark1', 'benchmark2', 'demo_selection_sort', 'demo_motor', 'demo_priority_queue')
+    benchmark_code_files = extract_needed_tests(BENCHMARK_TESTS, IR_TESTS)
+    benchmark_ir_files = extract_needed_tests(BENCHMARK_TESTS, ir_files)
+
+    # executor(benchmark_code_files, check_cfg_test, "CFG Test", "3", 0, ["-b", "--cfg"], False, "source/3/tiger/", None, benchmark_ir_files)
