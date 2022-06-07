@@ -123,7 +123,7 @@ def check_benchmark(asm_type, f, _stdout, _stderr, retcode, append_path):
     ret = ret[0].decode("utf-8")
     ret = list(filter(None, ret.split('\n')))[-1]
 
-    save[f] += asm_type + ' : ' + ret + " " + 'CORRECT Program' if correct else 'INCORRECT Program, CHECK IT' + '\n'
+    save[f] += asm_type + ' : ' + ret + " " + ('CORRECT Program' if correct else 'INCORRECT Program, CHECK IT') + '\n'
 
     return {"only_message": save[f]}, True
 
@@ -144,9 +144,9 @@ def test_hw3(is_test):
     benchmark_code_files = extract_needed_tests(BENCHMARK_TESTS, IR_TESTS)
     benchmark_ir_files = extract_needed_tests(BENCHMARK_TESTS, ir_files)
 
-    executor(benchmark_code_files,  partial(check_benchmark, NAIVE), "", "4", 0, ["-n", "--mips"], is_test,
+    executor(benchmark_code_files,  partial(check_benchmark, NAIVE), "", "5", 0, ["-n", "--mips"], is_test,
              "source/3/tiger/", None, benchmark_ir_files, skip_print=True)
-    executor(benchmark_code_files, partial(check_benchmark, IB), "", "4", 0, ["-b", "--mips"], is_test,
+    executor(benchmark_code_files, partial(check_benchmark, IB), "", "5", 0, ["-b", "--mips"], is_test,
              "source/3/tiger/", None, benchmark_ir_files, skip_print=True)
-    executor(benchmark_code_files, partial(check_benchmark, BRIGGS), "Benchmark Test", "4", 0, ["-g", "--mips"], is_test,
+    executor(benchmark_code_files, partial(check_benchmark, BRIGGS), "Benchmark Test", "5", 0, ["-g", "--mips"], is_test,
          "source/3/tiger/", None, benchmark_ir_files)
