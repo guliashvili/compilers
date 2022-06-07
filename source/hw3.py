@@ -144,9 +144,9 @@ def test_hw3(is_test):
     benchmark_code_files = extract_needed_tests(BENCHMARK_TESTS, IR_TESTS)
     benchmark_ir_files = extract_needed_tests(BENCHMARK_TESTS, ir_files)
 
-    executor(benchmark_code_files,  partial(check_benchmark, NAIVE), "", "4", 0, ["-n", "--mips"], False,
-             "source/3/tiger/", None, benchmark_ir_files)
-    executor(benchmark_code_files, partial(check_benchmark, IB), "", "4", 0, ["-b", "--mips"], False,
-             "source/3/tiger/", None, benchmark_ir_files)
-    executor(benchmark_code_files, partial(check_benchmark, BRIGGS), "Benchmark Test", "4", 0, ["-g", "--mips"], True,
-         "source/3/tiger/", None, benchmark_ir_files)
+    executor(benchmark_code_files,  partial(check_benchmark, NAIVE), "", "4", 0, ["-n", "--mips"], is_test,
+             "source/3/tiger/", None, benchmark_ir_files, True)
+    executor(benchmark_code_files, partial(check_benchmark, IB), "", "4", 0, ["-b", "--mips"], is_test,
+             "source/3/tiger/", None, benchmark_ir_files, True)
+    executor(benchmark_code_files, partial(check_benchmark, BRIGGS), "Benchmark Test", "4", 0, ["-g", "--mips"], is_test,
+         "source/3/tiger/", None, benchmark_ir_files, False)
