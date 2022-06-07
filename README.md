@@ -19,7 +19,10 @@ File Structure
         tigerc or tigerc.jar
 /results # empty table
 ```
+
 ```
+Bash Commands
+
 cd compilers
 python3 source/main.py hw=2
 
