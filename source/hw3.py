@@ -108,7 +108,7 @@ def benchmark():
 
 def test_hw3(is_test):
     check_files_hw3()
-    ir_files = map(lambda f: f'source/3/ir/{f}.ir' , IR_TESTS)
+    ir_files = map(lambda f: f'source/3/ir/{f}.ir', IR_TESTS)
     executor(IR_TESTS, check_naive_test, "Naive Test", "2", 1, ["-n", "--mips"], is_test, "source/3/tiger/", {t: .9 for t in IR_TESTS[:1]}, ir_files)
 
     CFG_LIVENESS_TESTS = ('demo_selection_sort', 'demo_motor')
