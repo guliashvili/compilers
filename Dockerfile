@@ -70,7 +70,7 @@ RUN set -eux; \
 
 RUN set -eux; \
     git clone https://github.com/portersrc/spim-keepstats \
-    && cd spim-keepstats\spim \
+    && cd spim-keepstats/spim \
     && make \
     && make install;
 
