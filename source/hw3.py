@@ -54,14 +54,14 @@ def check_naive_test(f, _stdout, _stderr, retcode, append_path):
 
     ret = run_thing(['spim', '-file', os.path.join(append_path, f'{f}.s')])
     ret = ret[0].decode("utf-8")
-    ret = '\n'.join(ret.split('\n')[1:])
+    ret = ret.split('\n')[1:]
     # if is test
     # with open(os.path.join(append_path.replace('source', 'answers'), f"{f}.native_answer"), "w") as fff:
     #     fff.write(ret)
     with open(os.path.join(append_path.replace('source', 'answers'), f"{f}.native_answer"), "r") as fff:
         content = fff.read().split('\n')
 
-    if ret == content:
+    if ret != content:
         return {"message": f"MIPS produces incorrect output, expected {content} got {ret}"}, False
 
     return {"message": "Good job"}, True
@@ -113,7 +113,7 @@ def check_benchmark(asm_type, f, _stdout, _stderr, retcode, append_path):
 
     ret = run_thing(['spim', '-file', os.path.join(append_path, f'{f}.{asm_type}.s')])
     ret = ret[0].decode("utf-8")
-    ret = '\n'.join(ret.split('\n')[1:])
+    ret = ret.split('\n')[1:]
     with open(os.path.join(append_path.replace('source', 'answers'), f"{f}.native_answer"), "r") as fff:
         content = fff.read().split('\n')
 
