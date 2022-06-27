@@ -131,22 +131,22 @@ def check_benchmark(asm_type, f, _stdout, _stderr, retcode, append_path):
 def test_hw3(is_test):
     check_files_hw3()
     ir_files = list(map(lambda f: f'source/3/ir/{f}.ir', IR_TESTS))
-    executor(IR_TESTS, check_naive_test, "Naive Test", "2", 1, ["-n", "--mips"], is_test, "source/3/tiger/", {t: .9 for t in IR_TESTS[:1]}, ir_files)
+    executor(IR_TESTS, check_naive_test, "Naive Test", "2", 1, ["-n", "--mips"], is_test, "source/3/tiger/", {t: .9 for t in IR_TESTS[:1]}, ir_files=ir_files)
 
     CFG_LIVENESS_TESTS = ('demo_selection_sort', 'demo_motor')
     cfg_liveness_code_files = extract_needed_tests(CFG_LIVENESS_TESTS, IR_TESTS)
     cfg_liveness_ir_files = extract_needed_tests(CFG_LIVENESS_TESTS, ir_files)
 
-    executor(cfg_liveness_code_files, check_cfg_test, "CFG Test", "3", 0, ["-b", "--cfg"], is_test, "source/3/tiger/", None, cfg_liveness_ir_files)
-    executor(cfg_liveness_code_files, check_liveness_test, "Liveness Test", "4", 0, ["-g", "--liveness"], is_test, "source/3/tiger/", None, cfg_liveness_ir_files)
+    executor(cfg_liveness_code_files, check_cfg_test, "CFG Test", "3", 0, ["-b", "--cfg"], is_test, "source/3/tiger/", None, ir_files=cfg_liveness_ir_files)
+    executor(cfg_liveness_code_files, check_liveness_test, "Liveness Test", "4", 0, ["-g", "--liveness"], is_test, "source/3/tiger/", None, ir_files=cfg_liveness_ir_files)
 
     BENCHMARK_TESTS = ('benchmark1', 'benchmark2', 'demo_selection_sort', 'demo_motor', 'demo_priority_queue')
     benchmark_code_files = extract_needed_tests(BENCHMARK_TESTS, IR_TESTS)
     benchmark_ir_files = extract_needed_tests(BENCHMARK_TESTS, ir_files)
 
     executor(benchmark_code_files,  partial(check_benchmark, NAIVE), "", "5", 0, ["-n", "--mips"], is_test,
-             "source/3/tiger/", None, benchmark_ir_files, skip_print=True)
+             "source/3/tiger/", None, ir_files=benchmark_ir_files, skip_print=True)
     executor(benchmark_code_files, partial(check_benchmark, IB), "", "5", 0, ["-b", "--mips"], is_test,
-             "source/3/tiger/", None, benchmark_ir_files, skip_print=True)
+             "source/3/tiger/", None, ir_files=benchmark_ir_files, skip_print=True)
     executor(benchmark_code_files, partial(check_benchmark, BRIGGS), "Benchmark Test", "5", 0, ["-g", "--mips"], is_test,
-         "source/3/tiger/", None, benchmark_ir_files)
+         "source/3/tiger/", None, ir_files=benchmark_ir_files)
